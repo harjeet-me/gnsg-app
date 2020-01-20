@@ -1,0 +1,22 @@
+version: '2'
+services:
+  gmsapp-app:
+    image: gmsapp
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=prod,swagger
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - SPRING_DATASOURCE_URL=jdbc:mysql://gmsapp-mysql:3306/gmsapp?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
+      - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
+      - SPRING_DATA_JEST_URI=http://gmsapp-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_REST_URIS=http://gmsapp-elasticsearch:9200
+    ports:
+      - 8080:8080
+  gmsapp-mysql:
+    extends:
+      file: mysql.yml
+      service: gmsapp-mysql
+  gmsapp-elasticsearch:
+    extends:
+      file: elasticsearch.yml
+      service: gmsapp-elasticsearch
