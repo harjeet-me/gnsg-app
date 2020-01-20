@@ -1,0 +1,93 @@
+
+// an ignored comment
+/** not an ignored comment */
+entity Event {
+	eventType EVENTTYPE ,
+    eventLocation EVENTLOCATION
+    eventDateTime Instant,
+    family String,
+    phoneNumber String,
+    email String ,
+    address String ,
+    withLangar Boolean,
+    langarMenu LANGARMENU ,
+    langarTime Instant ,
+    dueAmt BigDecimal,
+    paidAmt BigDecimal,
+    balAmt BigDecimal,
+    recieptNumber Long,
+    remark String ,
+    bookingDate Instant,
+    status EventStatus
+
+    
+}
+enum EventStatus{
+   BOOKED , COMPLETED , CANCELLED , REQUESTED
+}
+enum LANGARMENU {
+SIMPLE_JALEBI_SHAHIPANEER ,
+SIMPLE_JALEBI_MATARPANEER ,
+SIMPLE_KHEER_SHAHIPANEER ,
+SIMPLE_KHEER_MATARPANEER
+}
+enum EVENTLOCATION{
+HALL_2_GNSG , HALL_3_GNSG , GALLERY_GNSG , MAIN_HALL_GNSG , HOME , GNSG_SENIOR_CENTER
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Task {
+	title String,
+	description String ,
+    taskTime Instant
+}
+
+/**
+ * The Employee entity.
+ */
+entity Employee {
+	/**
+	* The firstname attribute.
+	*/
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String,
+	sevaStartDate Instant,
+    sevaEndDate Instant,
+	isValid Boolean
+}
+
+
+enum EVENTTYPE {
+    SUKHMANI_SAHIB, 
+    SUKHMANI_SAHIB_AT_HOME, FUNERAL_SEHAJ_PATH_BHOG, 
+    AKHAND_PATH_SAHIB ,
+    SEHAJ_PATH , LANGAR , KIRTAN_WITH_LANGAR 
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Employee {pathiSingh} to Event ,
+    Employee {ragiSingh} to Event ,
+    Employee {bookingBy} to Event ,
+    Employee {updatedBy} to Event
+	
+    }
+
+
+// Set pagination options
+
+paginate Task , Event , Employee with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
