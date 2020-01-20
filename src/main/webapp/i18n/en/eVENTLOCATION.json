@@ -1,0 +1,13 @@
+{
+  "gmsApp": {
+    "EVENTLOCATION": {
+      "null": "",
+      "HALL_2_GNSG": "HALL_2_GNSG",
+      "HALL_3_GNSG": "HALL_3_GNSG",
+      "GALLERY_GNSG": "GALLERY_GNSG",
+      "MAIN_HALL_GNSG": "MAIN_HALL_GNSG",
+      "HOME": "HOME",
+      "GNSG_SENIOR_CENTER": "GNSG_SENIOR_CENTER"
+    }
+  }
+}

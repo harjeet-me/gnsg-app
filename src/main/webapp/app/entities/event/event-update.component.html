@@ -1,0 +1,161 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-event-heading" jhiTranslate="gmsApp.event.home.createOrEditLabel">Create or edit a Event</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.eventType" for="field_eventType">Event Type</label>
+                    <select class="form-control" name="eventType" formControlName="eventType" id="field_eventType">
+                        <option value="SUKHMANI_SAHIB">{{'gmsApp.EVENTTYPE.SUKHMANI_SAHIB' | translate}}</option>
+                        <option value="SUKHMANI_SAHIB_AT_HOME">{{'gmsApp.EVENTTYPE.SUKHMANI_SAHIB_AT_HOME' | translate}}</option>
+                        <option value="FUNERAL_SEHAJ_PATH_BHOG">{{'gmsApp.EVENTTYPE.FUNERAL_SEHAJ_PATH_BHOG' | translate}}</option>
+                        <option value="AKHAND_PATH_SAHIB">{{'gmsApp.EVENTTYPE.AKHAND_PATH_SAHIB' | translate}}</option>
+                        <option value="SEHAJ_PATH">{{'gmsApp.EVENTTYPE.SEHAJ_PATH' | translate}}</option>
+                        <option value="LANGAR">{{'gmsApp.EVENTTYPE.LANGAR' | translate}}</option>
+                        <option value="KIRTAN_WITH_LANGAR">{{'gmsApp.EVENTTYPE.KIRTAN_WITH_LANGAR' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.eventLocation" for="field_eventLocation">Event Location</label>
+                    <select class="form-control" name="eventLocation" formControlName="eventLocation" id="field_eventLocation">
+                        <option value="HALL_2_GNSG">{{'gmsApp.EVENTLOCATION.HALL_2_GNSG' | translate}}</option>
+                        <option value="HALL_3_GNSG">{{'gmsApp.EVENTLOCATION.HALL_3_GNSG' | translate}}</option>
+                        <option value="GALLERY_GNSG">{{'gmsApp.EVENTLOCATION.GALLERY_GNSG' | translate}}</option>
+                        <option value="MAIN_HALL_GNSG">{{'gmsApp.EVENTLOCATION.MAIN_HALL_GNSG' | translate}}</option>
+                        <option value="HOME">{{'gmsApp.EVENTLOCATION.HOME' | translate}}</option>
+                        <option value="GNSG_SENIOR_CENTER">{{'gmsApp.EVENTLOCATION.GNSG_SENIOR_CENTER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.eventDateTime" for="field_eventDateTime">Event Date Time</label>
+                    <div class="d-flex">
+                        <input id="field_eventDateTime" type="datetime-local" class="form-control" name="eventDateTime" formControlName="eventDateTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.family" for="field_family">Family</label>
+                    <input type="text" class="form-control" name="family" id="field_family"
+                           formControlName="family"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.phoneNumber" for="field_phoneNumber">Phone Number</label>
+                    <input type="text" class="form-control" name="phoneNumber" id="field_phoneNumber"
+                           formControlName="phoneNumber"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.email" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                           formControlName="email"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.address" for="field_address">Address</label>
+                    <input type="text" class="form-control" name="address" id="field_address"
+                           formControlName="address"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.withLangar" for="field_withLangar">With Langar</label>
+                    <input type="checkbox" class="form-control" name="withLangar" id="field_withLangar"
+                           formControlName="withLangar"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.langarMenu" for="field_langarMenu">Langar Menu</label>
+                    <select class="form-control" name="langarMenu" formControlName="langarMenu" id="field_langarMenu">
+                        <option value="SIMPLE_JALEBI_SHAHIPANEER">{{'gmsApp.LANGARMENU.SIMPLE_JALEBI_SHAHIPANEER' | translate}}</option>
+                        <option value="SIMPLE_JALEBI_MATARPANEER">{{'gmsApp.LANGARMENU.SIMPLE_JALEBI_MATARPANEER' | translate}}</option>
+                        <option value="SIMPLE_KHEER_SHAHIPANEER">{{'gmsApp.LANGARMENU.SIMPLE_KHEER_SHAHIPANEER' | translate}}</option>
+                        <option value="SIMPLE_KHEER_MATARPANEER">{{'gmsApp.LANGARMENU.SIMPLE_KHEER_MATARPANEER' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.langarTime" for="field_langarTime">Langar Time</label>
+                    <div class="d-flex">
+                        <input id="field_langarTime" type="datetime-local" class="form-control" name="langarTime" formControlName="langarTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.dueAmt" for="field_dueAmt">Due Amt</label>
+                    <input type="number" class="form-control" name="dueAmt" id="field_dueAmt"
+                           formControlName="dueAmt"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.paidAmt" for="field_paidAmt">Paid Amt</label>
+                    <input type="number" class="form-control" name="paidAmt" id="field_paidAmt"
+                           formControlName="paidAmt"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.balAmt" for="field_balAmt">Bal Amt</label>
+                    <input type="number" class="form-control" name="balAmt" id="field_balAmt"
+                           formControlName="balAmt"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.recieptNumber" for="field_recieptNumber">Reciept Number</label>
+                    <input type="number" class="form-control" name="recieptNumber" id="field_recieptNumber"
+                           formControlName="recieptNumber"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.remark" for="field_remark">Remark</label>
+                    <input type="text" class="form-control" name="remark" id="field_remark"
+                           formControlName="remark"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.bookingDate" for="field_bookingDate">Booking Date</label>
+                    <div class="d-flex">
+                        <input id="field_bookingDate" type="datetime-local" class="form-control" name="bookingDate" formControlName="bookingDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="BOOKED">{{'gmsApp.EventStatus.BOOKED' | translate}}</option>
+                        <option value="COMPLETED">{{'gmsApp.EventStatus.COMPLETED' | translate}}</option>
+                        <option value="CANCELLED">{{'gmsApp.EventStatus.CANCELLED' | translate}}</option>
+                        <option value="REQUESTED">{{'gmsApp.EventStatus.REQUESTED' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.employee" for="field_employee">Employee</label>
+                    <select class="form-control" id="field_employee" name="employee" formControlName="employee">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="employeeOption.id === editForm.get('employee')!.value?.id ? editForm.get('employee')!.value : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackById">{{employeeOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.employee" for="field_employee">Employee</label>
+                    <select class="form-control" id="field_employee" name="employee" formControlName="employee">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="employeeOption.id === editForm.get('employee')!.value?.id ? editForm.get('employee')!.value : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackById">{{employeeOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.employee" for="field_employee">Employee</label>
+                    <select class="form-control" id="field_employee" name="employee" formControlName="employee">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="employeeOption.id === editForm.get('employee')!.value?.id ? editForm.get('employee')!.value : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackById">{{employeeOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gmsApp.event.employee" for="field_employee">Employee</label>
+                    <select class="form-control" id="field_employee" name="employee" formControlName="employee">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="employeeOption.id === editForm.get('employee')!.value?.id ? editForm.get('employee')!.value : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackById">{{employeeOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

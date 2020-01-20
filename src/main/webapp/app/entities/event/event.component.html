@@ -1,0 +1,134 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="gmsApp.event.home.title">Events</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-event" [routerLink]="['/event/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span class="hidden-sm-down"  jhiTranslate="gmsApp.event.home.createLabel">
+            Create a new Event
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'gmsApp.event.home.search' | translate }}">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <fa-icon [icon]="'search'"></fa-icon>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+                        <fa-icon [icon]="'trash-alt'"></fa-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="alert alert-warning" *ngIf="events?.length === 0">
+        <span jhiTranslate="gmsApp.event.home.notFound">No events found</span>
+    </div>
+    <div class="table-responsive" *ngIf="events?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="eventType"><span jhiTranslate="gmsApp.event.eventType">Event Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="eventLocation"><span jhiTranslate="gmsApp.event.eventLocation">Event Location</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="eventDateTime"><span jhiTranslate="gmsApp.event.eventDateTime">Event Date Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="family"><span jhiTranslate="gmsApp.event.family">Family</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="phoneNumber"><span jhiTranslate="gmsApp.event.phoneNumber">Phone Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="email"><span jhiTranslate="gmsApp.event.email">Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="address"><span jhiTranslate="gmsApp.event.address">Address</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="withLangar"><span jhiTranslate="gmsApp.event.withLangar">With Langar</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="langarMenu"><span jhiTranslate="gmsApp.event.langarMenu">Langar Menu</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="langarTime"><span jhiTranslate="gmsApp.event.langarTime">Langar Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="dueAmt"><span jhiTranslate="gmsApp.event.dueAmt">Due Amt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="paidAmt"><span jhiTranslate="gmsApp.event.paidAmt">Paid Amt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="balAmt"><span jhiTranslate="gmsApp.event.balAmt">Bal Amt</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="recieptNumber"><span jhiTranslate="gmsApp.event.recieptNumber">Reciept Number</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="remark"><span jhiTranslate="gmsApp.event.remark">Remark</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="bookingDate"><span jhiTranslate="gmsApp.event.bookingDate">Booking Date</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="status"><span jhiTranslate="gmsApp.event.status">Status</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="employee.id"><span jhiTranslate="gmsApp.event.employee">Employee</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="employee.id"><span jhiTranslate="gmsApp.event.employee">Employee</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="employee.id"><span jhiTranslate="gmsApp.event.employee">Employee</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="employee.id"><span jhiTranslate="gmsApp.event.employee">Employee</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let event of events ;trackBy: trackId">
+                <td><a [routerLink]="['/event', event.id, 'view' ]">{{event.id}}</a></td>
+                <td jhiTranslate="{{'gmsApp.EVENTTYPE.' + event.eventType}}">{{event.eventType}}</td>
+                <td jhiTranslate="{{'gmsApp.EVENTLOCATION.' + event.eventLocation}}">{{event.eventLocation}}</td>
+                <td>{{event.eventDateTime | date:'medium'}}</td>
+                <td>{{event.family}}</td>
+                <td>{{event.phoneNumber}}</td>
+                <td>{{event.email}}</td>
+                <td>{{event.address}}</td>
+                <td>{{event.withLangar}}</td>
+                <td jhiTranslate="{{'gmsApp.LANGARMENU.' + event.langarMenu}}">{{event.langarMenu}}</td>
+                <td>{{event.langarTime | date:'medium'}}</td>
+                <td>{{event.dueAmt}}</td>
+                <td>{{event.paidAmt}}</td>
+                <td>{{event.balAmt}}</td>
+                <td>{{event.recieptNumber}}</td>
+                <td>{{event.remark}}</td>
+                <td>{{event.bookingDate | date:'medium'}}</td>
+                <td jhiTranslate="{{'gmsApp.EventStatus.' + event.status}}">{{event.status}}</td>
+                <td>
+                    <div *ngIf="event.employee">
+                        <a [routerLink]="['/employee', event.employee?.id, 'view' ]" >{{event.employee?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="event.employee">
+                        <a [routerLink]="['/employee', event.employee?.id, 'view' ]" >{{event.employee?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="event.employee">
+                        <a [routerLink]="['/employee', event.employee?.id, 'view' ]" >{{event.employee?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="event.employee">
+                        <a [routerLink]="['/employee', event.employee?.id, 'view' ]" >{{event.employee?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/event', event.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/event', event.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(event)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="events?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>
