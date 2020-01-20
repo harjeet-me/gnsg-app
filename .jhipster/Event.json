@@ -1,0 +1,118 @@
+{
+    "name": "Event",
+    "fields": [
+        {
+            "fieldName": "eventType",
+            "fieldType": "EVENTTYPE",
+            "fieldValues": "SUKHMANI_SAHIB,SUKHMANI_SAHIB_AT_HOME,FUNERAL_SEHAJ_PATH_BHOG,AKHAND_PATH_SAHIB,SEHAJ_PATH,LANGAR,KIRTAN_WITH_LANGAR"
+        },
+        {
+            "fieldName": "eventLocation",
+            "fieldType": "EVENTLOCATION",
+            "fieldValues": "HALL_2_GNSG,HALL_3_GNSG,GALLERY_GNSG,MAIN_HALL_GNSG,HOME,GNSG_SENIOR_CENTER"
+        },
+        {
+            "fieldName": "eventDateTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "family",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "withLangar",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "langarMenu",
+            "fieldType": "LANGARMENU",
+            "fieldValues": "SIMPLE_JALEBI_SHAHIPANEER,SIMPLE_JALEBI_MATARPANEER,SIMPLE_KHEER_SHAHIPANEER,SIMPLE_KHEER_MATARPANEER"
+        },
+        {
+            "fieldName": "langarTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "dueAmt",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "paidAmt",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "balAmt",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "recieptNumber",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "remark",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bookingDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "EventStatus",
+            "fieldValues": "BOOKED,COMPLETED,CANCELLED,REQUESTED"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "employee",
+            "otherEntityRelationshipName": "pathiSingh",
+            "relationshipName": "employee",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "employee",
+            "otherEntityRelationshipName": "ragiSingh",
+            "relationshipName": "employee",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "employee",
+            "otherEntityRelationshipName": "bookingBy",
+            "relationshipName": "employee",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "employee",
+            "otherEntityRelationshipName": "updatedBy",
+            "relationshipName": "employee",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200120034557",
+    "javadoc": "not an ignored comment",
+    "entityTableName": "event",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

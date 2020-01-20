@@ -1,0 +1,71 @@
+{
+    "name": "Employee",
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "javadoc": "The firstname attribute.",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sevaStartDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "sevaEndDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "isValid",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "event",
+            "otherEntityRelationshipName": "employee",
+            "relationshipName": "pathiSingh"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "event",
+            "otherEntityRelationshipName": "employee",
+            "relationshipName": "ragiSingh"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "event",
+            "otherEntityRelationshipName": "employee",
+            "relationshipName": "bookingBy"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "event",
+            "otherEntityRelationshipName": "employee",
+            "relationshipName": "updatedBy"
+        }
+    ],
+    "changelogDate": "20200120034559",
+    "javadoc": "The Employee entity.",
+    "entityTableName": "employee",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

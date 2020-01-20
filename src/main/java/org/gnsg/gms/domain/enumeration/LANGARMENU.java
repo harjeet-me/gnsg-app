@@ -1,0 +1,8 @@
+package org.gnsg.gms.domain.enumeration;
+
+/**
+ * The LANGARMENU enumeration.
+ */
+public enum LANGARMENU {
+    SIMPLE_JALEBI_SHAHIPANEER, SIMPLE_JALEBI_MATARPANEER, SIMPLE_KHEER_SHAHIPANEER, SIMPLE_KHEER_MATARPANEER
+}

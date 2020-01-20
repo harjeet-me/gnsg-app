@@ -1,0 +1,11 @@
+{
+  "gmsApp": {
+    "EventStatus": {
+      "null": "",
+      "BOOKED": "BOOKED",
+      "COMPLETED": "COMPLETED",
+      "CANCELLED": "CANCELLED",
+      "REQUESTED": "REQUESTED"
+    }
+  }
+}

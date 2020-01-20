@@ -1,0 +1,8 @@
+package org.gnsg.gms.domain.enumeration;
+
+/**
+ * The EVENTTYPE enumeration.
+ */
+public enum EVENTTYPE {
+    SUKHMANI_SAHIB, SUKHMANI_SAHIB_AT_HOME, FUNERAL_SEHAJ_PATH_BHOG, AKHAND_PATH_SAHIB, SEHAJ_PATH, LANGAR, KIRTAN_WITH_LANGAR
+}
