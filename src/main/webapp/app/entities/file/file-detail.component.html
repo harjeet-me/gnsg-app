@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="file">
+            <h2><span jhiTranslate="gmsApp.file.detail.title">File</span> {{file.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gmsApp.file.attachment">Attachment</span></dt>
+                <dd>
+                    <div *ngIf="file.attachment">
+                        <a (click)="openFile(file.attachmentContentType!, file.attachment)" jhiTranslate="entity.action.open">open</a>
+                        {{file.attachmentContentType}}, {{byteSize(file.attachment)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="gmsApp.file.employee">Employee</span></dt>
+                <dd>
+                    <div *ngIf="file.employee">
+                        <a [routerLink]="['/employee', file.employee?.id, 'view']">{{file.employee?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/file', file.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

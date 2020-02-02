@@ -70,6 +70,10 @@ public class Employee implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Event> updatedBies = new HashSet<>();
 
+    @OneToMany(mappedBy = "employee")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<File> files = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -268,6 +272,31 @@ public class Employee implements Serializable {
 
     public void setUpdatedBies(Set<Event> events) {
         this.updatedBies = events;
+    }
+
+    public Set<File> getFiles() {
+        return files;
+    }
+
+    public Employee files(Set<File> files) {
+        this.files = files;
+        return this;
+    }
+
+    public Employee addFile(File file) {
+        this.files.add(file);
+        file.setEmployee(this);
+        return this;
+    }
+
+    public Employee removeFile(File file) {
+        this.files.remove(file);
+        file.setEmployee(null);
+        return this;
+    }
+
+    public void setFiles(Set<File> files) {
+        this.files = files;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

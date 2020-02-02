@@ -55,6 +55,12 @@
             "otherEntityName": "event",
             "otherEntityRelationshipName": "employee",
             "relationshipName": "updatedBy"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "file",
+            "otherEntityRelationshipName": "employee",
+            "relationshipName": "file"
         }
     ],
     "changelogDate": "20200120034559",

@@ -10,6 +10,7 @@
         "event": "Event",
         "task": "Task",
         "employee": "Employee",
+        "file": "File",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
