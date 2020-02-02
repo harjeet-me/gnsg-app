@@ -49,6 +49,8 @@ public class CacheConfiguration {
             createCache(cm, org.gnsg.gms.domain.Employee.class.getName() + ".ragiSinghs");
             createCache(cm, org.gnsg.gms.domain.Employee.class.getName() + ".bookingBies");
             createCache(cm, org.gnsg.gms.domain.Employee.class.getName() + ".updatedBies");
+            createCache(cm, org.gnsg.gms.domain.File.class.getName());
+            createCache(cm, org.gnsg.gms.domain.Employee.class.getName() + ".files");
             // jhipster-needle-ehcache-add-entry
         };
     }

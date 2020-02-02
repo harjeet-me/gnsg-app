@@ -28,6 +28,7 @@
       "ragiSingh": "Ragi Singh",
       "bookingBy": "Booking By",
       "updatedBy": "Updated By",
+      "file": "File",
       "help": {
         "firstName": "The firstname attribute."
       }

@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IEvent } from 'app/shared/model/event.model';
+import { IFile } from 'app/shared/model/file.model';
 
 export interface IEmployee {
   id?: number;
@@ -14,6 +15,7 @@ export interface IEmployee {
   ragiSinghs?: IEvent[];
   bookingBies?: IEvent[];
   updatedBies?: IEvent[];
+  files?: IFile[];
 }
 
 export class Employee implements IEmployee {
@@ -29,7 +31,8 @@ export class Employee implements IEmployee {
     public pathiSinghs?: IEvent[],
     public ragiSinghs?: IEvent[],
     public bookingBies?: IEvent[],
-    public updatedBies?: IEvent[]
+    public updatedBies?: IEvent[],
+    public files?: IFile[]
   ) {
     this.isValid = this.isValid || false;
   }
