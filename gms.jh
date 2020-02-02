@@ -22,6 +22,11 @@ entity Event {
 
     
 }
+
+entity File{   
+   attachment Blob
+}
+
 enum EventStatus{
    BOOKED , COMPLETED , CANCELLED , REQUESTED
 }
@@ -74,7 +79,9 @@ relationship OneToMany {
 	Employee {pathiSingh} to Event ,
     Employee {ragiSingh} to Event ,
     Employee {bookingBy} to Event ,
-    Employee {updatedBy} to Event
+    Employee {updatedBy} to Event ,
+    Employee {file} to File ,
+    
 	
     }
 
