@@ -19,6 +19,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'file',
         loadChildren: () => import('./file/file.module').then(m => m.GmsAppFileModule)
+      },
+      {
+        path: 'program',
+        loadChildren: () => import('./program/program.module').then(m => m.GmsAppProgramModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

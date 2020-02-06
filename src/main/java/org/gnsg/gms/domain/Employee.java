@@ -56,19 +56,19 @@ public class Employee implements Serializable {
 
     @OneToMany(mappedBy = "employee")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Event> pathiSinghs = new HashSet<>();
+    private Set<Program> pathiSinghs = new HashSet<>();
 
     @OneToMany(mappedBy = "employee")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Event> ragiSinghs = new HashSet<>();
+    private Set<Program> ragiSinghs = new HashSet<>();
 
     @OneToMany(mappedBy = "employee")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Event> bookingBies = new HashSet<>();
+    private Set<Program> bookingBies = new HashSet<>();
 
     @OneToMany(mappedBy = "employee")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Event> updatedBies = new HashSet<>();
+    private Set<Program> updatedBies = new HashSet<>();
 
     @OneToMany(mappedBy = "employee")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -174,104 +174,104 @@ public class Employee implements Serializable {
         this.isValid = isValid;
     }
 
-    public Set<Event> getPathiSinghs() {
+    public Set<Program> getPathiSinghs() {
         return pathiSinghs;
     }
 
-    public Employee pathiSinghs(Set<Event> events) {
-        this.pathiSinghs = events;
+    public Employee pathiSinghs(Set<Program> programs) {
+        this.pathiSinghs = programs;
         return this;
     }
 
-    public Employee addPathiSingh(Event event) {
-        this.pathiSinghs.add(event);
-        event.setEmployee(this);
+    public Employee addPathiSingh(Program program) {
+        this.pathiSinghs.add(program);
+        program.setEmployee(this);
         return this;
     }
 
-    public Employee removePathiSingh(Event event) {
-        this.pathiSinghs.remove(event);
-        event.setEmployee(null);
+    public Employee removePathiSingh(Program program) {
+        this.pathiSinghs.remove(program);
+        program.setEmployee(null);
         return this;
     }
 
-    public void setPathiSinghs(Set<Event> events) {
-        this.pathiSinghs = events;
+    public void setPathiSinghs(Set<Program> programs) {
+        this.pathiSinghs = programs;
     }
 
-    public Set<Event> getRagiSinghs() {
+    public Set<Program> getRagiSinghs() {
         return ragiSinghs;
     }
 
-    public Employee ragiSinghs(Set<Event> events) {
-        this.ragiSinghs = events;
+    public Employee ragiSinghs(Set<Program> programs) {
+        this.ragiSinghs = programs;
         return this;
     }
 
-    public Employee addRagiSingh(Event event) {
-        this.ragiSinghs.add(event);
-        event.setEmployee(this);
+    public Employee addRagiSingh(Program program) {
+        this.ragiSinghs.add(program);
+        program.setEmployee(this);
         return this;
     }
 
-    public Employee removeRagiSingh(Event event) {
-        this.ragiSinghs.remove(event);
-        event.setEmployee(null);
+    public Employee removeRagiSingh(Program program) {
+        this.ragiSinghs.remove(program);
+        program.setEmployee(null);
         return this;
     }
 
-    public void setRagiSinghs(Set<Event> events) {
-        this.ragiSinghs = events;
+    public void setRagiSinghs(Set<Program> programs) {
+        this.ragiSinghs = programs;
     }
 
-    public Set<Event> getBookingBies() {
+    public Set<Program> getBookingBies() {
         return bookingBies;
     }
 
-    public Employee bookingBies(Set<Event> events) {
-        this.bookingBies = events;
+    public Employee bookingBies(Set<Program> programs) {
+        this.bookingBies = programs;
         return this;
     }
 
-    public Employee addBookingBy(Event event) {
-        this.bookingBies.add(event);
-        event.setEmployee(this);
+    public Employee addBookingBy(Program program) {
+        this.bookingBies.add(program);
+        program.setEmployee(this);
         return this;
     }
 
-    public Employee removeBookingBy(Event event) {
-        this.bookingBies.remove(event);
-        event.setEmployee(null);
+    public Employee removeBookingBy(Program program) {
+        this.bookingBies.remove(program);
+        program.setEmployee(null);
         return this;
     }
 
-    public void setBookingBies(Set<Event> events) {
-        this.bookingBies = events;
+    public void setBookingBies(Set<Program> programs) {
+        this.bookingBies = programs;
     }
 
-    public Set<Event> getUpdatedBies() {
+    public Set<Program> getUpdatedBies() {
         return updatedBies;
     }
 
-    public Employee updatedBies(Set<Event> events) {
-        this.updatedBies = events;
+    public Employee updatedBies(Set<Program> programs) {
+        this.updatedBies = programs;
         return this;
     }
 
-    public Employee addUpdatedBy(Event event) {
-        this.updatedBies.add(event);
-        event.setEmployee(this);
+    public Employee addUpdatedBy(Program program) {
+        this.updatedBies.add(program);
+        program.setEmployee(this);
         return this;
     }
 
-    public Employee removeUpdatedBy(Event event) {
-        this.updatedBies.remove(event);
-        event.setEmployee(null);
+    public Employee removeUpdatedBy(Program program) {
+        this.updatedBies.remove(program);
+        program.setEmployee(null);
         return this;
     }
 
-    public void setUpdatedBies(Set<Event> events) {
-        this.updatedBies = events;
+    public void setUpdatedBies(Set<Program> programs) {
+        this.updatedBies = programs;
     }
 
     public Set<File> getFiles() {
