@@ -1,7 +1,7 @@
 
 // an ignored comment
 /** not an ignored comment */
-entity Event {
+entity Program {
 	eventType EVENTTYPE ,
     eventLocation EVENTLOCATION
     eventDateTime Instant,
@@ -76,10 +76,10 @@ enum EVENTTYPE {
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Employee {pathiSingh} to Event ,
-    Employee {ragiSingh} to Event ,
-    Employee {bookingBy} to Event ,
-    Employee {updatedBy} to Event ,
+	Employee {pathiSingh} to Program ,
+    Employee {ragiSingh} to Program ,
+    Employee {bookingBy} to Program ,
+    Employee {updatedBy} to Program ,
     Employee {file} to File ,
     
 	
@@ -88,7 +88,7 @@ relationship OneToMany {
 
 // Set pagination options
 
-paginate Task , Event , Employee with pagination
+paginate Task , Program , Employee with pagination
 
 // Use Data Transfert Objects (DTO)
 // dto * with mapstruct
