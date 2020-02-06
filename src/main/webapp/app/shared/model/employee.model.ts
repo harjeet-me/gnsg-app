@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { IEvent } from 'app/shared/model/event.model';
+import { IProgram } from 'app/shared/model/program.model';
 import { IFile } from 'app/shared/model/file.model';
 
 export interface IEmployee {
@@ -11,10 +11,10 @@ export interface IEmployee {
   sevaStartDate?: Moment;
   sevaEndDate?: Moment;
   isValid?: boolean;
-  pathiSinghs?: IEvent[];
-  ragiSinghs?: IEvent[];
-  bookingBies?: IEvent[];
-  updatedBies?: IEvent[];
+  pathiSinghs?: IProgram[];
+  ragiSinghs?: IProgram[];
+  bookingBies?: IProgram[];
+  updatedBies?: IProgram[];
   files?: IFile[];
 }
 
@@ -28,10 +28,10 @@ export class Employee implements IEmployee {
     public sevaStartDate?: Moment,
     public sevaEndDate?: Moment,
     public isValid?: boolean,
-    public pathiSinghs?: IEvent[],
-    public ragiSinghs?: IEvent[],
-    public bookingBies?: IEvent[],
-    public updatedBies?: IEvent[],
+    public pathiSinghs?: IProgram[],
+    public ragiSinghs?: IProgram[],
+    public bookingBies?: IProgram[],
+    public updatedBies?: IProgram[],
     public files?: IFile[]
   ) {
     this.isValid = this.isValid || false;

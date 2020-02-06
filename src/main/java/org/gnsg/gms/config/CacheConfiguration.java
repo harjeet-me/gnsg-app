@@ -51,6 +51,7 @@ public class CacheConfiguration {
             createCache(cm, org.gnsg.gms.domain.Employee.class.getName() + ".updatedBies");
             createCache(cm, org.gnsg.gms.domain.File.class.getName());
             createCache(cm, org.gnsg.gms.domain.Employee.class.getName() + ".files");
+            createCache(cm, org.gnsg.gms.domain.Program.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
