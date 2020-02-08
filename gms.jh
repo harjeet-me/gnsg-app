@@ -76,12 +76,9 @@ enum EVENTTYPE {
 
 // defining multiple OneToMany relationships with comments
 relationship OneToMany {
-	Employee {pathiSingh} to Program ,
-    Employee {ragiSingh} to Program ,
-    Employee {bookingBy} to Program ,
+	
     Employee {updatedBy} to Program ,
-    Employee {file} to File ,
-    
+    Employee {file} to File ,    
 	
     }
 
