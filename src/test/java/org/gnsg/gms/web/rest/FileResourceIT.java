@@ -126,7 +126,7 @@ public class FileResourceIT {
 
         // Create the File
         restFileMockMvc.perform(post("/api/files")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(file)))
             .andExpect(status().isCreated());
 
@@ -151,7 +151,7 @@ public class FileResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restFileMockMvc.perform(post("/api/files")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(file)))
             .andExpect(status().isBadRequest());
 
@@ -173,7 +173,7 @@ public class FileResourceIT {
         // Get all the fileList
         restFileMockMvc.perform(get("/api/files?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(file.getId().intValue())))
             .andExpect(jsonPath("$.[*].attachmentContentType").value(hasItem(DEFAULT_ATTACHMENT_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].attachment").value(hasItem(Base64Utils.encodeToString(DEFAULT_ATTACHMENT))));
@@ -188,7 +188,7 @@ public class FileResourceIT {
         // Get the file
         restFileMockMvc.perform(get("/api/files/{id}", file.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(file.getId().intValue()))
             .andExpect(jsonPath("$.attachmentContentType").value(DEFAULT_ATTACHMENT_CONTENT_TYPE))
             .andExpect(jsonPath("$.attachment").value(Base64Utils.encodeToString(DEFAULT_ATTACHMENT)));
@@ -221,7 +221,7 @@ public class FileResourceIT {
             .attachmentContentType(UPDATED_ATTACHMENT_CONTENT_TYPE);
 
         restFileMockMvc.perform(put("/api/files")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedFile)))
             .andExpect(status().isOk());
 
@@ -245,7 +245,7 @@ public class FileResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restFileMockMvc.perform(put("/api/files")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(file)))
             .andExpect(status().isBadRequest());
 
@@ -267,7 +267,7 @@ public class FileResourceIT {
 
         // Delete the file
         restFileMockMvc.perform(delete("/api/files/{id}", file.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(TestUtil.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
@@ -288,7 +288,7 @@ public class FileResourceIT {
         // Search the file
         restFileMockMvc.perform(get("/api/_search/files?query=id:" + file.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(file.getId().intValue())))
             .andExpect(jsonPath("$.[*].attachmentContentType").value(hasItem(DEFAULT_ATTACHMENT_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].attachment").value(hasItem(Base64Utils.encodeToString(DEFAULT_ATTACHMENT))));

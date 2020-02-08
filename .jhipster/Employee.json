@@ -36,24 +36,6 @@
             "relationshipType": "one-to-many",
             "otherEntityName": "program",
             "otherEntityRelationshipName": "employee",
-            "relationshipName": "pathiSingh"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "program",
-            "otherEntityRelationshipName": "employee",
-            "relationshipName": "ragiSingh"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "program",
-            "otherEntityRelationshipName": "employee",
-            "relationshipName": "bookingBy"
-        },
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "program",
-            "otherEntityRelationshipName": "employee",
             "relationshipName": "updatedBy"
         },
         {

@@ -40,7 +40,8 @@ export class ProgramComponent implements OnInit, OnDestroy {
   }
 
   loadPage(page?: number): void {
-    const pageToLoad: number = page ? page : this.page;
+    const pageToLoad: number = page || this.page;
+
     if (this.currentSearch) {
       this.programService
         .search({
@@ -55,6 +56,7 @@ export class ProgramComponent implements OnInit, OnDestroy {
         );
       return;
     }
+
     this.programService
       .query({
         page: pageToLoad - 1,
@@ -123,7 +125,7 @@ export class ProgramComponent implements OnInit, OnDestroy {
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.programs = data ? data : [];
+    this.programs = data || [];
   }
 
   protected onError(): void {

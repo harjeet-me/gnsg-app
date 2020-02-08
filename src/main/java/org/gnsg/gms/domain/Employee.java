@@ -1,4 +1,5 @@
 package org.gnsg.gms.domain;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -26,7 +27,6 @@ public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     /**
@@ -53,18 +53,6 @@ public class Employee implements Serializable {
 
     @Column(name = "is_valid")
     private Boolean isValid;
-
-    @OneToMany(mappedBy = "employee")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Program> pathiSinghs = new HashSet<>();
-
-    @OneToMany(mappedBy = "employee")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Program> ragiSinghs = new HashSet<>();
-
-    @OneToMany(mappedBy = "employee")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Program> bookingBies = new HashSet<>();
 
     @OneToMany(mappedBy = "employee")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -172,81 +160,6 @@ public class Employee implements Serializable {
 
     public void setIsValid(Boolean isValid) {
         this.isValid = isValid;
-    }
-
-    public Set<Program> getPathiSinghs() {
-        return pathiSinghs;
-    }
-
-    public Employee pathiSinghs(Set<Program> programs) {
-        this.pathiSinghs = programs;
-        return this;
-    }
-
-    public Employee addPathiSingh(Program program) {
-        this.pathiSinghs.add(program);
-        program.setEmployee(this);
-        return this;
-    }
-
-    public Employee removePathiSingh(Program program) {
-        this.pathiSinghs.remove(program);
-        program.setEmployee(null);
-        return this;
-    }
-
-    public void setPathiSinghs(Set<Program> programs) {
-        this.pathiSinghs = programs;
-    }
-
-    public Set<Program> getRagiSinghs() {
-        return ragiSinghs;
-    }
-
-    public Employee ragiSinghs(Set<Program> programs) {
-        this.ragiSinghs = programs;
-        return this;
-    }
-
-    public Employee addRagiSingh(Program program) {
-        this.ragiSinghs.add(program);
-        program.setEmployee(this);
-        return this;
-    }
-
-    public Employee removeRagiSingh(Program program) {
-        this.ragiSinghs.remove(program);
-        program.setEmployee(null);
-        return this;
-    }
-
-    public void setRagiSinghs(Set<Program> programs) {
-        this.ragiSinghs = programs;
-    }
-
-    public Set<Program> getBookingBies() {
-        return bookingBies;
-    }
-
-    public Employee bookingBies(Set<Program> programs) {
-        this.bookingBies = programs;
-        return this;
-    }
-
-    public Employee addBookingBy(Program program) {
-        this.bookingBies.add(program);
-        program.setEmployee(this);
-        return this;
-    }
-
-    public Employee removeBookingBy(Program program) {
-        this.bookingBies.remove(program);
-        program.setEmployee(null);
-        return this;
-    }
-
-    public void setBookingBies(Set<Program> programs) {
-        this.bookingBies = programs;
     }
 
     public Set<Program> getUpdatedBies() {

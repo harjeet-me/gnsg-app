@@ -13,7 +13,7 @@ export class TaskDeleteDialogComponent {
 
   constructor(protected taskService: TaskService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 

@@ -61,7 +61,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findAll(pageable);
     }
 
-
     /**
      * Get one employee by id.
      *

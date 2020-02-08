@@ -25,9 +25,6 @@ export interface IProgram {
   bookingDate?: Moment;
   status?: EventStatus;
   employee?: IEmployee;
-  employee?: IEmployee;
-  employee?: IEmployee;
-  employee?: IEmployee;
 }
 
 export class Program implements IProgram {
@@ -50,9 +47,6 @@ export class Program implements IProgram {
     public remark?: string,
     public bookingDate?: Moment,
     public status?: EventStatus,
-    public employee?: IEmployee,
-    public employee?: IEmployee,
-    public employee?: IEmployee,
     public employee?: IEmployee
   ) {
     this.withLangar = this.withLangar || false;

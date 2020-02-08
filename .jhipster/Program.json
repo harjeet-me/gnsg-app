@@ -78,27 +78,6 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "employee",
-            "otherEntityRelationshipName": "pathiSingh",
-            "relationshipName": "employee",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "employee",
-            "otherEntityRelationshipName": "ragiSingh",
-            "relationshipName": "employee",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "employee",
-            "otherEntityRelationshipName": "bookingBy",
-            "relationshipName": "employee",
-            "otherEntityField": "id"
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "employee",
             "otherEntityRelationshipName": "updatedBy",
             "relationshipName": "employee",
             "otherEntityField": "id"

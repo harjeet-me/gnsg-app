@@ -11,9 +11,6 @@ export interface IEmployee {
   sevaStartDate?: Moment;
   sevaEndDate?: Moment;
   isValid?: boolean;
-  pathiSinghs?: IProgram[];
-  ragiSinghs?: IProgram[];
-  bookingBies?: IProgram[];
   updatedBies?: IProgram[];
   files?: IFile[];
 }
@@ -28,9 +25,6 @@ export class Employee implements IEmployee {
     public sevaStartDate?: Moment,
     public sevaEndDate?: Moment,
     public isValid?: boolean,
-    public pathiSinghs?: IProgram[],
-    public ragiSinghs?: IProgram[],
-    public bookingBies?: IProgram[],
     public updatedBies?: IProgram[],
     public files?: IFile[]
   ) {
