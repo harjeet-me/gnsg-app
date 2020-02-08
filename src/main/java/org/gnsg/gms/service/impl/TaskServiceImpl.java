@@ -61,7 +61,6 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findAll(pageable);
     }
 
-
     /**
      * Get one task by id.
      *

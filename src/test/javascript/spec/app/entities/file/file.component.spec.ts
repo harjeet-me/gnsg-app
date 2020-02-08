@@ -16,8 +16,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [GmsAppTestModule],
-        declarations: [FileComponent],
-        providers: []
+        declarations: [FileComponent]
       })
         .overrideTemplate(FileComponent, '')
         .compileComponents();

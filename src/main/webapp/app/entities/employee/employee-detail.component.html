@@ -1,50 +1,53 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="employee">
-            <h2><span jhiTranslate="gmsApp.employee.detail.title">Employee</span> {{employee.id}}</h2>
+            <h2><span jhiTranslate="gmsApp.employee.detail.title">Employee</span> {{ employee.id }}</h2>
+
             <hr>
+
             <jhi-alert-error></jhi-alert-error>
+
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="gmsApp.employee.firstName" [ngbTooltip]="'gmsApp.employee.help.firstName' | translate">First Name</span></dt>
                 <dd>
-                    <span>{{employee.firstName}}</span>
+                    <span>{{ employee.firstName }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.employee.lastName">Last Name</span></dt>
                 <dd>
-                    <span>{{employee.lastName}}</span>
+                    <span>{{ employee.lastName }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.employee.email">Email</span></dt>
                 <dd>
-                    <span>{{employee.email}}</span>
+                    <span>{{ employee.email }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.employee.phoneNumber">Phone Number</span></dt>
                 <dd>
-                    <span>{{employee.phoneNumber}}</span>
+                    <span>{{ employee.phoneNumber }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.employee.sevaStartDate">Seva Start Date</span></dt>
                 <dd>
-                    <span>{{employee.sevaStartDate}}</span>
+                    <span>{{ employee.sevaStartDate }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.employee.sevaEndDate">Seva End Date</span></dt>
                 <dd>
-                    <span>{{employee.sevaEndDate}}</span>
+                    <span>{{ employee.sevaEndDate }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.employee.isValid">Is Valid</span></dt>
                 <dd>
-                    <span>{{employee.isValid}}</span>
+                    <span>{{ employee.isValid }}</span>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/employee', employee.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
     </div>

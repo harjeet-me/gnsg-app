@@ -210,7 +210,7 @@ public class ProgramResourceIT {
 
         // Create the Program
         restProgramMockMvc.perform(post("/api/programs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(program)))
             .andExpect(status().isCreated());
 
@@ -250,7 +250,7 @@ public class ProgramResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restProgramMockMvc.perform(post("/api/programs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(program)))
             .andExpect(status().isBadRequest());
 
@@ -272,7 +272,7 @@ public class ProgramResourceIT {
         // Get all the programList
         restProgramMockMvc.perform(get("/api/programs?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(program.getId().intValue())))
             .andExpect(jsonPath("$.[*].eventType").value(hasItem(DEFAULT_EVENT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].eventLocation").value(hasItem(DEFAULT_EVENT_LOCATION.toString())))
@@ -302,7 +302,7 @@ public class ProgramResourceIT {
         // Get the program
         restProgramMockMvc.perform(get("/api/programs/{id}", program.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(program.getId().intValue()))
             .andExpect(jsonPath("$.eventType").value(DEFAULT_EVENT_TYPE.toString()))
             .andExpect(jsonPath("$.eventLocation").value(DEFAULT_EVENT_LOCATION.toString()))
@@ -365,7 +365,7 @@ public class ProgramResourceIT {
             .status(UPDATED_STATUS);
 
         restProgramMockMvc.perform(put("/api/programs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedProgram)))
             .andExpect(status().isOk());
 
@@ -404,7 +404,7 @@ public class ProgramResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restProgramMockMvc.perform(put("/api/programs")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(program)))
             .andExpect(status().isBadRequest());
 
@@ -426,7 +426,7 @@ public class ProgramResourceIT {
 
         // Delete the program
         restProgramMockMvc.perform(delete("/api/programs/{id}", program.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(TestUtil.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
@@ -447,7 +447,7 @@ public class ProgramResourceIT {
         // Search the program
         restProgramMockMvc.perform(get("/api/_search/programs?query=id:" + program.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(program.getId().intValue())))
             .andExpect(jsonPath("$.[*].eventType").value(hasItem(DEFAULT_EVENT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].eventLocation").value(hasItem(DEFAULT_EVENT_LOCATION.toString())))

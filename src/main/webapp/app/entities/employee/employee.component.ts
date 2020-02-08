@@ -40,7 +40,8 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   }
 
   loadPage(page?: number): void {
-    const pageToLoad: number = page ? page : this.page;
+    const pageToLoad: number = page || this.page;
+
     if (this.currentSearch) {
       this.employeeService
         .search({
@@ -55,6 +56,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
         );
       return;
     }
+
     this.employeeService
       .query({
         page: pageToLoad - 1,
@@ -123,7 +125,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.employees = data ? data : [];
+    this.employees = data || [];
   }
 
   protected onError(): void {

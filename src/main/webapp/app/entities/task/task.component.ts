@@ -40,7 +40,8 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   loadPage(page?: number): void {
-    const pageToLoad: number = page ? page : this.page;
+    const pageToLoad: number = page || this.page;
+
     if (this.currentSearch) {
       this.taskService
         .search({
@@ -55,6 +56,7 @@ export class TaskComponent implements OnInit, OnDestroy {
         );
       return;
     }
+
     this.taskService
       .query({
         page: pageToLoad - 1,
@@ -123,7 +125,7 @@ export class TaskComponent implements OnInit, OnDestroy {
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.tasks = data ? data : [];
+    this.tasks = data || [];
   }
 
   protected onError(): void {

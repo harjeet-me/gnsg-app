@@ -135,7 +135,7 @@ public class TaskResourceIT {
 
         // Create the Task
         restTaskMockMvc.perform(post("/api/tasks")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(task)))
             .andExpect(status().isCreated());
 
@@ -161,7 +161,7 @@ public class TaskResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restTaskMockMvc.perform(post("/api/tasks")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(task)))
             .andExpect(status().isBadRequest());
 
@@ -183,7 +183,7 @@ public class TaskResourceIT {
         // Get all the taskList
         restTaskMockMvc.perform(get("/api/tasks?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(task.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
@@ -199,7 +199,7 @@ public class TaskResourceIT {
         // Get the task
         restTaskMockMvc.perform(get("/api/tasks/{id}", task.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(task.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
@@ -234,7 +234,7 @@ public class TaskResourceIT {
             .taskTime(UPDATED_TASK_TIME);
 
         restTaskMockMvc.perform(put("/api/tasks")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedTask)))
             .andExpect(status().isOk());
 
@@ -259,7 +259,7 @@ public class TaskResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTaskMockMvc.perform(put("/api/tasks")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(task)))
             .andExpect(status().isBadRequest());
 
@@ -281,7 +281,7 @@ public class TaskResourceIT {
 
         // Delete the task
         restTaskMockMvc.perform(delete("/api/tasks/{id}", task.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(TestUtil.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
@@ -302,7 +302,7 @@ public class TaskResourceIT {
         // Search the task
         restTaskMockMvc.perform(get("/api/_search/tasks?query=id:" + task.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(task.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))

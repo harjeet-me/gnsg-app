@@ -28,7 +28,6 @@ public interface TaskService {
      */
     Page<Task> findAll(Pageable pageable);
 
-
     /**
      * Get the "id" task.
      *

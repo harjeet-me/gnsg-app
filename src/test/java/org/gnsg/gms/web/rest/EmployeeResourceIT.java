@@ -155,7 +155,7 @@ public class EmployeeResourceIT {
 
         // Create the Employee
         restEmployeeMockMvc.perform(post("/api/employees")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(employee)))
             .andExpect(status().isCreated());
 
@@ -185,7 +185,7 @@ public class EmployeeResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restEmployeeMockMvc.perform(post("/api/employees")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(employee)))
             .andExpect(status().isBadRequest());
 
@@ -207,7 +207,7 @@ public class EmployeeResourceIT {
         // Get all the employeeList
         restEmployeeMockMvc.perform(get("/api/employees?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(employee.getId().intValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
@@ -227,7 +227,7 @@ public class EmployeeResourceIT {
         // Get the employee
         restEmployeeMockMvc.perform(get("/api/employees/{id}", employee.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(employee.getId().intValue()))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME))
@@ -270,7 +270,7 @@ public class EmployeeResourceIT {
             .isValid(UPDATED_IS_VALID);
 
         restEmployeeMockMvc.perform(put("/api/employees")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedEmployee)))
             .andExpect(status().isOk());
 
@@ -299,7 +299,7 @@ public class EmployeeResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restEmployeeMockMvc.perform(put("/api/employees")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(employee)))
             .andExpect(status().isBadRequest());
 
@@ -321,7 +321,7 @@ public class EmployeeResourceIT {
 
         // Delete the employee
         restEmployeeMockMvc.perform(delete("/api/employees/{id}", employee.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(TestUtil.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
@@ -342,7 +342,7 @@ public class EmployeeResourceIT {
         // Search the employee
         restEmployeeMockMvc.perform(get("/api/_search/employees?query=id:" + employee.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(employee.getId().intValue())))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))

@@ -13,9 +13,7 @@ export class ProgramDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ program }) => {
-      this.program = program;
-    });
+    this.activatedRoute.data.subscribe(({ program }) => (this.program = program));
   }
 
   previousState(): void {

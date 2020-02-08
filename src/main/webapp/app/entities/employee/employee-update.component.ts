@@ -32,6 +32,12 @@ export class EmployeeUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ employee }) => {
+      if (!employee.id) {
+        const today = moment().startOf('day');
+        employee.sevaStartDate = today;
+        employee.sevaEndDate = today;
+      }
+
       this.updateForm(employee);
     });
   }
@@ -43,8 +49,8 @@ export class EmployeeUpdateComponent implements OnInit {
       lastName: employee.lastName,
       email: employee.email,
       phoneNumber: employee.phoneNumber,
-      sevaStartDate: employee.sevaStartDate != null ? employee.sevaStartDate.format(DATE_TIME_FORMAT) : null,
-      sevaEndDate: employee.sevaEndDate != null ? employee.sevaEndDate.format(DATE_TIME_FORMAT) : null,
+      sevaStartDate: employee.sevaStartDate ? employee.sevaStartDate.format(DATE_TIME_FORMAT) : null,
+      sevaEndDate: employee.sevaEndDate ? employee.sevaEndDate.format(DATE_TIME_FORMAT) : null,
       isValid: employee.isValid
     });
   }
@@ -71,12 +77,12 @@ export class EmployeeUpdateComponent implements OnInit {
       lastName: this.editForm.get(['lastName'])!.value,
       email: this.editForm.get(['email'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
-      sevaStartDate:
-        this.editForm.get(['sevaStartDate'])!.value != null
-          ? moment(this.editForm.get(['sevaStartDate'])!.value, DATE_TIME_FORMAT)
-          : undefined,
-      sevaEndDate:
-        this.editForm.get(['sevaEndDate'])!.value != null ? moment(this.editForm.get(['sevaEndDate'])!.value, DATE_TIME_FORMAT) : undefined,
+      sevaStartDate: this.editForm.get(['sevaStartDate'])!.value
+        ? moment(this.editForm.get(['sevaStartDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      sevaEndDate: this.editForm.get(['sevaEndDate'])!.value
+        ? moment(this.editForm.get(['sevaEndDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
       isValid: this.editForm.get(['isValid'])!.value
     };
   }

@@ -14,23 +14,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="employee"/>
 
-        <addForeignKeyConstraint baseColumnNames="employee_id"
-                                 baseTableName="program"
-                                 constraintName="fk_program_employee_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="employee"/>
-
-        <addForeignKeyConstraint baseColumnNames="employee_id"
-                                 baseTableName="program"
-                                 constraintName="fk_program_employee_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="employee"/>
-
-        <addForeignKeyConstraint baseColumnNames="employee_id"
-                                 baseTableName="program"
-                                 constraintName="fk_program_employee_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="employee"/>
-
     </changeSet>
 </databaseChangeLog>

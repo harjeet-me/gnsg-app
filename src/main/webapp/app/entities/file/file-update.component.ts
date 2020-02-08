@@ -4,7 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { IFile, File } from 'app/shared/model/file.model';
@@ -19,7 +18,6 @@ import { EmployeeService } from 'app/entities/employee/employee.service';
 })
 export class FileUpdateComponent implements OnInit {
   isSaving = false;
-
   employees: IEmployee[] = [];
 
   editForm = this.fb.group({
@@ -42,14 +40,7 @@ export class FileUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ file }) => {
       this.updateForm(file);
 
-      this.employeeService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IEmployee[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IEmployee[]) => (this.employees = resBody));
+      this.employeeService.query().subscribe((res: HttpResponse<IEmployee[]>) => (this.employees = res.body || []));
     });
   }
 

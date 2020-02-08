@@ -1,100 +1,85 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="program">
-            <h2><span jhiTranslate="gmsApp.program.detail.title">Program</span> {{program.id}}</h2>
+            <h2><span jhiTranslate="gmsApp.program.detail.title">Program</span> {{ program.id }}</h2>
+
             <hr>
+
             <jhi-alert-error></jhi-alert-error>
+
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="gmsApp.program.eventType">Event Type</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'gmsApp.EVENTTYPE.' + program.eventType}}">{{program.eventType}}</span>
+                    <span jhiTranslate="{{ 'gmsApp.EVENTTYPE.' + program.eventType }}">{{ program.eventType }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.eventLocation">Event Location</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'gmsApp.EVENTLOCATION.' + program.eventLocation}}">{{program.eventLocation}}</span>
+                    <span jhiTranslate="{{ 'gmsApp.EVENTLOCATION.' + program.eventLocation }}">{{ program.eventLocation }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.eventDateTime">Event Date Time</span></dt>
                 <dd>
-                    <span>{{program.eventDateTime}}</span>
+                    <span>{{ program.eventDateTime }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.family">Family</span></dt>
                 <dd>
-                    <span>{{program.family}}</span>
+                    <span>{{ program.family }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.phoneNumber">Phone Number</span></dt>
                 <dd>
-                    <span>{{program.phoneNumber}}</span>
+                    <span>{{ program.phoneNumber }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.email">Email</span></dt>
                 <dd>
-                    <span>{{program.email}}</span>
+                    <span>{{ program.email }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.address">Address</span></dt>
                 <dd>
-                    <span>{{program.address}}</span>
+                    <span>{{ program.address }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.withLangar">With Langar</span></dt>
                 <dd>
-                    <span>{{program.withLangar}}</span>
+                    <span>{{ program.withLangar }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.langarMenu">Langar Menu</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'gmsApp.LANGARMENU.' + program.langarMenu}}">{{program.langarMenu}}</span>
+                    <span jhiTranslate="{{ 'gmsApp.LANGARMENU.' + program.langarMenu }}">{{ program.langarMenu }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.langarTime">Langar Time</span></dt>
                 <dd>
-                    <span>{{program.langarTime}}</span>
+                    <span>{{ program.langarTime }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.dueAmt">Due Amt</span></dt>
                 <dd>
-                    <span>{{program.dueAmt}}</span>
+                    <span>{{ program.dueAmt }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.paidAmt">Paid Amt</span></dt>
                 <dd>
-                    <span>{{program.paidAmt}}</span>
+                    <span>{{ program.paidAmt }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.balAmt">Bal Amt</span></dt>
                 <dd>
-                    <span>{{program.balAmt}}</span>
+                    <span>{{ program.balAmt }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.recieptNumber">Reciept Number</span></dt>
                 <dd>
-                    <span>{{program.recieptNumber}}</span>
+                    <span>{{ program.recieptNumber }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.remark">Remark</span></dt>
                 <dd>
-                    <span>{{program.remark}}</span>
+                    <span>{{ program.remark }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.bookingDate">Booking Date</span></dt>
                 <dd>
-                    <span>{{program.bookingDate}}</span>
+                    <span>{{ program.bookingDate }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.status">Status</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'gmsApp.EventStatus.' + program.status}}">{{program.status}}</span>
+                    <span jhiTranslate="{{ 'gmsApp.EventStatus.' + program.status }}">{{ program.status }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.employee">Employee</span></dt>
                 <dd>
                     <div *ngIf="program.employee">
-                        <a [routerLink]="['/employee', program.employee?.id, 'view']">{{program.employee?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="gmsApp.program.employee">Employee</span></dt>
-                <dd>
-                    <div *ngIf="program.employee">
-                        <a [routerLink]="['/employee', program.employee?.id, 'view']">{{program.employee?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="gmsApp.program.employee">Employee</span></dt>
-                <dd>
-                    <div *ngIf="program.employee">
-                        <a [routerLink]="['/employee', program.employee?.id, 'view']">{{program.employee?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="gmsApp.program.employee">Employee</span></dt>
-                <dd>
-                    <div *ngIf="program.employee">
-                        <a [routerLink]="['/employee', program.employee?.id, 'view']">{{program.employee?.id}}</a>
+                        <a [routerLink]="['/employee', program.employee?.id, 'view']">{{ program.employee?.id }}</a>
                     </div>
                 </dd>
             </dl>
@@ -102,13 +87,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/program', program.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
     </div>

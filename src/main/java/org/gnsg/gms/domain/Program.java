@@ -1,4 +1,5 @@
 package org.gnsg.gms.domain;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.Cache;
@@ -33,7 +34,6 @@ public class Program implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @org.springframework.data.elasticsearch.annotations.Field(type = FieldType.Keyword)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -92,19 +92,7 @@ public class Program implements Serializable {
     private EventStatus status;
 
     @ManyToOne
-    @JsonIgnoreProperties("pathiSinghs")
-    private Employee employee;
-
-    @ManyToOne
-    @JsonIgnoreProperties("pathiSinghs")
-    private Employee employee;
-
-    @ManyToOne
-    @JsonIgnoreProperties("pathiSinghs")
-    private Employee employee;
-
-    @ManyToOne
-    @JsonIgnoreProperties("pathiSinghs")
+    @JsonIgnoreProperties("updatedBies")
     private Employee employee;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -335,45 +323,6 @@ public class Program implements Serializable {
 
     public void setStatus(EventStatus status) {
         this.status = status;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public Program employee(Employee employee) {
-        this.employee = employee;
-        return this;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public Program employee(Employee employee) {
-        this.employee = employee;
-        return this;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public Program employee(Employee employee) {
-        this.employee = employee;
-        return this;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public Employee getEmployee() {
