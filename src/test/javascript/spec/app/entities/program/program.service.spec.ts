@@ -31,9 +31,8 @@ describe('Service Tests', () => {
       elemDefault = new Program(
         0,
         EVENTTYPE.SUKHMANI_SAHIB,
-        EVENTLOCATION.HALL_2_GNSG,
+        EVENTLOCATION.HALL_2,
         currentDate,
-        'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
@@ -54,7 +53,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            eventDateTime: currentDate.format(DATE_TIME_FORMAT),
+            etime: currentDate.format(DATE_TIME_FORMAT),
             langarTime: currentDate.format(DATE_TIME_FORMAT),
             bookingDate: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -72,7 +71,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            eventDateTime: currentDate.format(DATE_TIME_FORMAT),
+            etime: currentDate.format(DATE_TIME_FORMAT),
             langarTime: currentDate.format(DATE_TIME_FORMAT),
             bookingDate: currentDate.format(DATE_TIME_FORMAT)
           },
@@ -81,7 +80,7 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            eventDateTime: currentDate,
+            etime: currentDate,
             langarTime: currentDate,
             bookingDate: currentDate
           },
@@ -98,12 +97,11 @@ describe('Service Tests', () => {
       it('should update a Program', () => {
         const returnedFromService = Object.assign(
           {
-            eventType: 'BBBBBB',
-            eventLocation: 'BBBBBB',
-            eventDateTime: currentDate.format(DATE_TIME_FORMAT),
+            programType: 'BBBBBB',
+            location: 'BBBBBB',
+            etime: currentDate.format(DATE_TIME_FORMAT),
             family: 'BBBBBB',
             phoneNumber: 'BBBBBB',
-            email: 'BBBBBB',
             address: 'BBBBBB',
             withLangar: true,
             langarMenu: 'BBBBBB',
@@ -121,7 +119,7 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            eventDateTime: currentDate,
+            etime: currentDate,
             langarTime: currentDate,
             bookingDate: currentDate
           },
@@ -138,12 +136,11 @@ describe('Service Tests', () => {
       it('should return a list of Program', () => {
         const returnedFromService = Object.assign(
           {
-            eventType: 'BBBBBB',
-            eventLocation: 'BBBBBB',
-            eventDateTime: currentDate.format(DATE_TIME_FORMAT),
+            programType: 'BBBBBB',
+            location: 'BBBBBB',
+            etime: currentDate.format(DATE_TIME_FORMAT),
             family: 'BBBBBB',
             phoneNumber: 'BBBBBB',
-            email: 'BBBBBB',
             address: 'BBBBBB',
             withLangar: true,
             langarMenu: 'BBBBBB',
@@ -161,7 +158,7 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            eventDateTime: currentDate,
+            etime: currentDate,
             langarTime: currentDate,
             bookingDate: currentDate
           },

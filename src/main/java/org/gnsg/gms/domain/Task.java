@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
+import java.util.Objects;
 import java.time.Instant;
 
 /**

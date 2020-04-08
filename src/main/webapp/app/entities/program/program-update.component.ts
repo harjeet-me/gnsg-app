@@ -9,8 +9,6 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IProgram, Program } from 'app/shared/model/program.model';
 import { ProgramService } from './program.service';
-import { IEmployee } from 'app/shared/model/employee.model';
-import { EmployeeService } from 'app/entities/employee/employee.service';
 
 @Component({
   selector: 'jhi-program-update',
@@ -18,16 +16,14 @@ import { EmployeeService } from 'app/entities/employee/employee.service';
 })
 export class ProgramUpdateComponent implements OnInit {
   isSaving = false;
-  employees: IEmployee[] = [];
 
   editForm = this.fb.group({
     id: [],
-    eventType: [],
-    eventLocation: [],
-    eventDateTime: [],
+    programType: [],
+    location: [],
+    etime: [],
     family: [],
     phoneNumber: [],
-    email: [],
     address: [],
     withLangar: [],
     langarMenu: [],
@@ -38,41 +34,32 @@ export class ProgramUpdateComponent implements OnInit {
     recieptNumber: [],
     remark: [],
     bookingDate: [],
-    status: [],
-    employee: []
+    status: []
   });
 
-  constructor(
-    protected programService: ProgramService,
-    protected employeeService: EmployeeService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected programService: ProgramService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ program }) => {
       if (!program.id) {
         const today = moment().startOf('day');
-        program.eventDateTime = today;
+        program.etime = today;
         program.langarTime = today;
         program.bookingDate = today;
       }
 
       this.updateForm(program);
-
-      this.employeeService.query().subscribe((res: HttpResponse<IEmployee[]>) => (this.employees = res.body || []));
     });
   }
 
   updateForm(program: IProgram): void {
     this.editForm.patchValue({
       id: program.id,
-      eventType: program.eventType,
-      eventLocation: program.eventLocation,
-      eventDateTime: program.eventDateTime ? program.eventDateTime.format(DATE_TIME_FORMAT) : null,
+      programType: program.programType,
+      location: program.location,
+      etime: program.etime ? program.etime.format(DATE_TIME_FORMAT) : null,
       family: program.family,
       phoneNumber: program.phoneNumber,
-      email: program.email,
       address: program.address,
       withLangar: program.withLangar,
       langarMenu: program.langarMenu,
@@ -83,8 +70,7 @@ export class ProgramUpdateComponent implements OnInit {
       recieptNumber: program.recieptNumber,
       remark: program.remark,
       bookingDate: program.bookingDate ? program.bookingDate.format(DATE_TIME_FORMAT) : null,
-      status: program.status,
-      employee: program.employee
+      status: program.status
     });
   }
 
@@ -106,14 +92,11 @@ export class ProgramUpdateComponent implements OnInit {
     return {
       ...new Program(),
       id: this.editForm.get(['id'])!.value,
-      eventType: this.editForm.get(['eventType'])!.value,
-      eventLocation: this.editForm.get(['eventLocation'])!.value,
-      eventDateTime: this.editForm.get(['eventDateTime'])!.value
-        ? moment(this.editForm.get(['eventDateTime'])!.value, DATE_TIME_FORMAT)
-        : undefined,
+      programType: this.editForm.get(['programType'])!.value,
+      location: this.editForm.get(['location'])!.value,
+      etime: this.editForm.get(['etime'])!.value ? moment(this.editForm.get(['etime'])!.value, DATE_TIME_FORMAT) : undefined,
       family: this.editForm.get(['family'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
-      email: this.editForm.get(['email'])!.value,
       address: this.editForm.get(['address'])!.value,
       withLangar: this.editForm.get(['withLangar'])!.value,
       langarMenu: this.editForm.get(['langarMenu'])!.value,
@@ -126,8 +109,7 @@ export class ProgramUpdateComponent implements OnInit {
       bookingDate: this.editForm.get(['bookingDate'])!.value
         ? moment(this.editForm.get(['bookingDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      status: this.editForm.get(['status'])!.value,
-      employee: this.editForm.get(['employee'])!.value
+      status: this.editForm.get(['status'])!.value
     };
   }
 
@@ -145,9 +127,5 @@ export class ProgramUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: IEmployee): any {
-    return item.id;
   }
 }

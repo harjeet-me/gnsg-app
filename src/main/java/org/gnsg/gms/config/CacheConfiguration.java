@@ -52,6 +52,8 @@ public class CacheConfiguration {
             createCache(cm, org.gnsg.gms.domain.File.class.getName());
             createCache(cm, org.gnsg.gms.domain.Employee.class.getName() + ".files");
             createCache(cm, org.gnsg.gms.domain.Program.class.getName());
+            createCache(cm, org.gnsg.gms.domain.Program.class.getName() + ".sevadars");
+            createCache(cm, org.gnsg.gms.domain.Sevadar.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

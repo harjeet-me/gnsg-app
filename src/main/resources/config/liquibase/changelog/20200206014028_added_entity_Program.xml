@@ -3,7 +3,7 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
         <property name="autoIncrement" value="true"/>
@@ -16,22 +16,19 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="event_type" type="varchar(255)">
+            <column name="program_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="event_location" type="varchar(255)">
+            <column name="location" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="event_date_time" type="datetime">
+            <column name="etime" type="datetime">
                 <constraints nullable="true" />
             </column>
             <column name="family" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="phone_number" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-            <column name="email" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="address" type="varchar(255)">
@@ -67,12 +64,9 @@
             <column name="status" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="employee_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="program" columnName="event_date_time" columnDataType="datetime"/>
+        <dropDefaultValue tableName="program" columnName="etime" columnDataType="datetime"/>
         <dropDefaultValue tableName="program" columnName="langar_time" columnDataType="datetime"/>
         <dropDefaultValue tableName="program" columnName="booking_date" columnDataType="datetime"/>
     </changeSet>
@@ -96,12 +90,11 @@
                   separator=";"
                   tableName="program">
             <column name="id" type="numeric"/>
-            <column name="event_type" type="string"/>
-            <column name="event_location" type="string"/>
-            <column name="event_date_time" type="datetime"/>
+            <column name="program_type" type="string"/>
+            <column name="location" type="string"/>
+            <column name="etime" type="datetime"/>
             <column name="family" type="string"/>
             <column name="phone_number" type="string"/>
-            <column name="email" type="string"/>
             <column name="address" type="string"/>
             <column name="with_langar" type="boolean"/>
             <column name="langar_menu" type="string"/>

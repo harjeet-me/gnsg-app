@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="sevadar">
+            <h2><span jhiTranslate="gmsApp.sevadar.detail.title">Sevadar</span> {{ sevadar.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gmsApp.sevadar.name" [ngbTooltip]="'gmsApp.sevadar.help.name' | translate">Name</span></dt>
+                <dd>
+                    <span>{{ sevadar.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="gmsApp.sevadar.email">Email</span></dt>
+                <dd>
+                    <span>{{ sevadar.email }}</span>
+                </dd>
+                <dt><span jhiTranslate="gmsApp.sevadar.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ sevadar.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="gmsApp.sevadar.sevaStartDate">Seva Start Date</span></dt>
+                <dd>
+                    <span>{{ sevadar.sevaStartDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gmsApp.sevadar.sevaEndDate">Seva End Date</span></dt>
+                <dd>
+                    <span>{{ sevadar.sevaEndDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gmsApp.sevadar.isValid">Is Valid</span></dt>
+                <dd>
+                    <span>{{ sevadar.isValid }}</span>
+                </dd>
+                <dt><span jhiTranslate="gmsApp.sevadar.program">Program</span></dt>
+                <dd>
+                    <div *ngIf="sevadar.program">
+                        <a [routerLink]="['/program', sevadar.program?.id, 'view']">{{ sevadar.program?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/sevadar', sevadar.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

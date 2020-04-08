@@ -5,23 +5,21 @@ import org.gnsg.gms.domain.Program;
 import org.gnsg.gms.repository.ProgramRepository;
 import org.gnsg.gms.repository.search.ProgramSearchRepository;
 import org.gnsg.gms.service.ProgramService;
-import org.gnsg.gms.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -29,7 +27,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
-import static org.gnsg.gms.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
@@ -45,25 +42,25 @@ import org.gnsg.gms.domain.enumeration.EventStatus;
  * Integration tests for the {@link ProgramResource} REST controller.
  */
 @SpringBootTest(classes = GmsApp.class)
+@ExtendWith(MockitoExtension.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class ProgramResourceIT {
 
-    private static final EVENTTYPE DEFAULT_EVENT_TYPE = EVENTTYPE.SUKHMANI_SAHIB;
-    private static final EVENTTYPE UPDATED_EVENT_TYPE = EVENTTYPE.SUKHMANI_SAHIB_AT_HOME;
+    private static final EVENTTYPE DEFAULT_PROGRAM_TYPE = EVENTTYPE.SUKHMANI_SAHIB;
+    private static final EVENTTYPE UPDATED_PROGRAM_TYPE = EVENTTYPE.SUKHMANI_SAHIB_AT_HOME;
 
-    private static final EVENTLOCATION DEFAULT_EVENT_LOCATION = EVENTLOCATION.HALL_2_GNSG;
-    private static final EVENTLOCATION UPDATED_EVENT_LOCATION = EVENTLOCATION.HALL_3_GNSG;
+    private static final EVENTLOCATION DEFAULT_LOCATION = EVENTLOCATION.HALL_2;
+    private static final EVENTLOCATION UPDATED_LOCATION = EVENTLOCATION.HALL_3;
 
-    private static final Instant DEFAULT_EVENT_DATE_TIME = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_EVENT_DATE_TIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_ETIME = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_ETIME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_FAMILY = "AAAAAAAAAA";
     private static final String UPDATED_FAMILY = "BBBBBBBBBB";
 
     private static final String DEFAULT_PHONE_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_PHONE_NUMBER = "BBBBBBBBBB";
-
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
 
     private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
@@ -113,35 +110,12 @@ public class ProgramResourceIT {
     private ProgramSearchRepository mockProgramSearchRepository;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restProgramMockMvc;
 
     private Program program;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final ProgramResource programResource = new ProgramResource(programService);
-        this.restProgramMockMvc = MockMvcBuilders.standaloneSetup(programResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -151,12 +125,11 @@ public class ProgramResourceIT {
      */
     public static Program createEntity(EntityManager em) {
         Program program = new Program()
-            .eventType(DEFAULT_EVENT_TYPE)
-            .eventLocation(DEFAULT_EVENT_LOCATION)
-            .eventDateTime(DEFAULT_EVENT_DATE_TIME)
+            .programType(DEFAULT_PROGRAM_TYPE)
+            .location(DEFAULT_LOCATION)
+            .etime(DEFAULT_ETIME)
             .family(DEFAULT_FAMILY)
             .phoneNumber(DEFAULT_PHONE_NUMBER)
-            .email(DEFAULT_EMAIL)
             .address(DEFAULT_ADDRESS)
             .withLangar(DEFAULT_WITH_LANGAR)
             .langarMenu(DEFAULT_LANGAR_MENU)
@@ -178,12 +151,11 @@ public class ProgramResourceIT {
      */
     public static Program createUpdatedEntity(EntityManager em) {
         Program program = new Program()
-            .eventType(UPDATED_EVENT_TYPE)
-            .eventLocation(UPDATED_EVENT_LOCATION)
-            .eventDateTime(UPDATED_EVENT_DATE_TIME)
+            .programType(UPDATED_PROGRAM_TYPE)
+            .location(UPDATED_LOCATION)
+            .etime(UPDATED_ETIME)
             .family(UPDATED_FAMILY)
             .phoneNumber(UPDATED_PHONE_NUMBER)
-            .email(UPDATED_EMAIL)
             .address(UPDATED_ADDRESS)
             .withLangar(UPDATED_WITH_LANGAR)
             .langarMenu(UPDATED_LANGAR_MENU)
@@ -210,7 +182,7 @@ public class ProgramResourceIT {
 
         // Create the Program
         restProgramMockMvc.perform(post("/api/programs")
-            .contentType(TestUtil.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(program)))
             .andExpect(status().isCreated());
 
@@ -218,12 +190,11 @@ public class ProgramResourceIT {
         List<Program> programList = programRepository.findAll();
         assertThat(programList).hasSize(databaseSizeBeforeCreate + 1);
         Program testProgram = programList.get(programList.size() - 1);
-        assertThat(testProgram.getEventType()).isEqualTo(DEFAULT_EVENT_TYPE);
-        assertThat(testProgram.getEventLocation()).isEqualTo(DEFAULT_EVENT_LOCATION);
-        assertThat(testProgram.getEventDateTime()).isEqualTo(DEFAULT_EVENT_DATE_TIME);
+        assertThat(testProgram.getProgramType()).isEqualTo(DEFAULT_PROGRAM_TYPE);
+        assertThat(testProgram.getLocation()).isEqualTo(DEFAULT_LOCATION);
+        assertThat(testProgram.getEtime()).isEqualTo(DEFAULT_ETIME);
         assertThat(testProgram.getFamily()).isEqualTo(DEFAULT_FAMILY);
         assertThat(testProgram.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
-        assertThat(testProgram.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testProgram.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testProgram.isWithLangar()).isEqualTo(DEFAULT_WITH_LANGAR);
         assertThat(testProgram.getLangarMenu()).isEqualTo(DEFAULT_LANGAR_MENU);
@@ -250,7 +221,7 @@ public class ProgramResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restProgramMockMvc.perform(post("/api/programs")
-            .contentType(TestUtil.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(program)))
             .andExpect(status().isBadRequest());
 
@@ -274,12 +245,11 @@ public class ProgramResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(program.getId().intValue())))
-            .andExpect(jsonPath("$.[*].eventType").value(hasItem(DEFAULT_EVENT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].eventLocation").value(hasItem(DEFAULT_EVENT_LOCATION.toString())))
-            .andExpect(jsonPath("$.[*].eventDateTime").value(hasItem(DEFAULT_EVENT_DATE_TIME.toString())))
+            .andExpect(jsonPath("$.[*].programType").value(hasItem(DEFAULT_PROGRAM_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
+            .andExpect(jsonPath("$.[*].etime").value(hasItem(DEFAULT_ETIME.toString())))
             .andExpect(jsonPath("$.[*].family").value(hasItem(DEFAULT_FAMILY)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
             .andExpect(jsonPath("$.[*].withLangar").value(hasItem(DEFAULT_WITH_LANGAR.booleanValue())))
             .andExpect(jsonPath("$.[*].langarMenu").value(hasItem(DEFAULT_LANGAR_MENU.toString())))
@@ -304,12 +274,11 @@ public class ProgramResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(program.getId().intValue()))
-            .andExpect(jsonPath("$.eventType").value(DEFAULT_EVENT_TYPE.toString()))
-            .andExpect(jsonPath("$.eventLocation").value(DEFAULT_EVENT_LOCATION.toString()))
-            .andExpect(jsonPath("$.eventDateTime").value(DEFAULT_EVENT_DATE_TIME.toString()))
+            .andExpect(jsonPath("$.programType").value(DEFAULT_PROGRAM_TYPE.toString()))
+            .andExpect(jsonPath("$.location").value(DEFAULT_LOCATION.toString()))
+            .andExpect(jsonPath("$.etime").value(DEFAULT_ETIME.toString()))
             .andExpect(jsonPath("$.family").value(DEFAULT_FAMILY))
             .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS))
             .andExpect(jsonPath("$.withLangar").value(DEFAULT_WITH_LANGAR.booleanValue()))
             .andExpect(jsonPath("$.langarMenu").value(DEFAULT_LANGAR_MENU.toString()))
@@ -346,12 +315,11 @@ public class ProgramResourceIT {
         // Disconnect from session so that the updates on updatedProgram are not directly saved in db
         em.detach(updatedProgram);
         updatedProgram
-            .eventType(UPDATED_EVENT_TYPE)
-            .eventLocation(UPDATED_EVENT_LOCATION)
-            .eventDateTime(UPDATED_EVENT_DATE_TIME)
+            .programType(UPDATED_PROGRAM_TYPE)
+            .location(UPDATED_LOCATION)
+            .etime(UPDATED_ETIME)
             .family(UPDATED_FAMILY)
             .phoneNumber(UPDATED_PHONE_NUMBER)
-            .email(UPDATED_EMAIL)
             .address(UPDATED_ADDRESS)
             .withLangar(UPDATED_WITH_LANGAR)
             .langarMenu(UPDATED_LANGAR_MENU)
@@ -365,7 +333,7 @@ public class ProgramResourceIT {
             .status(UPDATED_STATUS);
 
         restProgramMockMvc.perform(put("/api/programs")
-            .contentType(TestUtil.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedProgram)))
             .andExpect(status().isOk());
 
@@ -373,12 +341,11 @@ public class ProgramResourceIT {
         List<Program> programList = programRepository.findAll();
         assertThat(programList).hasSize(databaseSizeBeforeUpdate);
         Program testProgram = programList.get(programList.size() - 1);
-        assertThat(testProgram.getEventType()).isEqualTo(UPDATED_EVENT_TYPE);
-        assertThat(testProgram.getEventLocation()).isEqualTo(UPDATED_EVENT_LOCATION);
-        assertThat(testProgram.getEventDateTime()).isEqualTo(UPDATED_EVENT_DATE_TIME);
+        assertThat(testProgram.getProgramType()).isEqualTo(UPDATED_PROGRAM_TYPE);
+        assertThat(testProgram.getLocation()).isEqualTo(UPDATED_LOCATION);
+        assertThat(testProgram.getEtime()).isEqualTo(UPDATED_ETIME);
         assertThat(testProgram.getFamily()).isEqualTo(UPDATED_FAMILY);
         assertThat(testProgram.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
-        assertThat(testProgram.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testProgram.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testProgram.isWithLangar()).isEqualTo(UPDATED_WITH_LANGAR);
         assertThat(testProgram.getLangarMenu()).isEqualTo(UPDATED_LANGAR_MENU);
@@ -404,7 +371,7 @@ public class ProgramResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restProgramMockMvc.perform(put("/api/programs")
-            .contentType(TestUtil.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(program)))
             .andExpect(status().isBadRequest());
 
@@ -426,7 +393,7 @@ public class ProgramResourceIT {
 
         // Delete the program
         restProgramMockMvc.perform(delete("/api/programs/{id}", program.getId())
-            .accept(TestUtil.APPLICATION_JSON))
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
@@ -449,12 +416,11 @@ public class ProgramResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(program.getId().intValue())))
-            .andExpect(jsonPath("$.[*].eventType").value(hasItem(DEFAULT_EVENT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].eventLocation").value(hasItem(DEFAULT_EVENT_LOCATION.toString())))
-            .andExpect(jsonPath("$.[*].eventDateTime").value(hasItem(DEFAULT_EVENT_DATE_TIME.toString())))
+            .andExpect(jsonPath("$.[*].programType").value(hasItem(DEFAULT_PROGRAM_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].location").value(hasItem(DEFAULT_LOCATION.toString())))
+            .andExpect(jsonPath("$.[*].etime").value(hasItem(DEFAULT_ETIME.toString())))
             .andExpect(jsonPath("$.[*].family").value(hasItem(DEFAULT_FAMILY)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
             .andExpect(jsonPath("$.[*].withLangar").value(hasItem(DEFAULT_WITH_LANGAR.booleanValue())))
             .andExpect(jsonPath("$.[*].langarMenu").value(hasItem(DEFAULT_LANGAR_MENU.toString())))

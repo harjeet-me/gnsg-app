@@ -58,7 +58,7 @@ export class ProgramService {
 
   protected convertDateFromClient(program: IProgram): IProgram {
     const copy: IProgram = Object.assign({}, program, {
-      eventDateTime: program.eventDateTime && program.eventDateTime.isValid() ? program.eventDateTime.toJSON() : undefined,
+      etime: program.etime && program.etime.isValid() ? program.etime.toJSON() : undefined,
       langarTime: program.langarTime && program.langarTime.isValid() ? program.langarTime.toJSON() : undefined,
       bookingDate: program.bookingDate && program.bookingDate.isValid() ? program.bookingDate.toJSON() : undefined
     });
@@ -67,7 +67,7 @@ export class ProgramService {
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.eventDateTime = res.body.eventDateTime ? moment(res.body.eventDateTime) : undefined;
+      res.body.etime = res.body.etime ? moment(res.body.etime) : undefined;
       res.body.langarTime = res.body.langarTime ? moment(res.body.langarTime) : undefined;
       res.body.bookingDate = res.body.bookingDate ? moment(res.body.bookingDate) : undefined;
     }
@@ -77,7 +77,7 @@ export class ProgramService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((program: IProgram) => {
-        program.eventDateTime = program.eventDateTime ? moment(program.eventDateTime) : undefined;
+        program.etime = program.etime ? moment(program.etime) : undefined;
         program.langarTime = program.langarTime ? moment(program.langarTime) : undefined;
         program.bookingDate = program.bookingDate ? moment(program.bookingDate) : undefined;
       });

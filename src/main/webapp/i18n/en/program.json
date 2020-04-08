@@ -17,12 +17,11 @@
       "detail": {
         "title": "Program"
       },
-      "eventType": "Event Type",
-      "eventLocation": "Event Location",
-      "eventDateTime": "Event Date Time",
+      "programType": "Program Type",
+      "location": "Location",
+      "etime": "Etime",
       "family": "Family",
       "phoneNumber": "Phone Number",
-      "email": "Email",
       "address": "Address",
       "withLangar": "With Langar",
       "langarMenu": "Langar Menu",
@@ -34,7 +33,7 @@
       "remark": "Remark",
       "bookingDate": "Booking Date",
       "status": "Status",
-      "employee": "Employee"
+      "sevadar": "Sevadar"
     }
   }
 }
