@@ -5,6 +5,7 @@ import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ITask, Task } from 'app/shared/model/task.model';
 import { TaskService } from './task.service';
@@ -42,7 +43,7 @@ export const taskRoute: Routes = [
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
       pageTitle: 'gmsApp.task.home.title'
     },
@@ -55,7 +56,7 @@ export const taskRoute: Routes = [
       task: TaskResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       pageTitle: 'gmsApp.task.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -67,7 +68,7 @@ export const taskRoute: Routes = [
       task: TaskResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       pageTitle: 'gmsApp.task.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -79,7 +80,7 @@ export const taskRoute: Routes = [
       task: TaskResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       pageTitle: 'gmsApp.task.home.title'
     },
     canActivate: [UserRouteAccessService]

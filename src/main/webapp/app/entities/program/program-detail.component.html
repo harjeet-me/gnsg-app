@@ -8,17 +8,17 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="gmsApp.program.eventType">Event Type</span></dt>
+                <dt><span jhiTranslate="gmsApp.program.programType">Program Type</span></dt>
                 <dd>
-                    <span jhiTranslate="{{ 'gmsApp.EVENTTYPE.' + program.eventType }}">{{ program.eventType }}</span>
+                    <span jhiTranslate="{{ 'gmsApp.EVENTTYPE.' + program.programType }}">{{ program.programType }}</span>
                 </dd>
-                <dt><span jhiTranslate="gmsApp.program.eventLocation">Event Location</span></dt>
+                <dt><span jhiTranslate="gmsApp.program.location">Location</span></dt>
                 <dd>
-                    <span jhiTranslate="{{ 'gmsApp.EVENTLOCATION.' + program.eventLocation }}">{{ program.eventLocation }}</span>
+                    <span jhiTranslate="{{ 'gmsApp.EVENTLOCATION.' + program.location }}">{{ program.location }}</span>
                 </dd>
-                <dt><span jhiTranslate="gmsApp.program.eventDateTime">Event Date Time</span></dt>
+                <dt><span jhiTranslate="gmsApp.program.etime">Etime</span></dt>
                 <dd>
-                    <span>{{ program.eventDateTime }}</span>
+                    <span>{{ program.etime }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.family">Family</span></dt>
                 <dd>
@@ -27,10 +27,6 @@
                 <dt><span jhiTranslate="gmsApp.program.phoneNumber">Phone Number</span></dt>
                 <dd>
                     <span>{{ program.phoneNumber }}</span>
-                </dd>
-                <dt><span jhiTranslate="gmsApp.program.email">Email</span></dt>
-                <dd>
-                    <span>{{ program.email }}</span>
                 </dd>
                 <dt><span jhiTranslate="gmsApp.program.address">Address</span></dt>
                 <dd>
@@ -75,12 +71,6 @@
                 <dt><span jhiTranslate="gmsApp.program.status">Status</span></dt>
                 <dd>
                     <span jhiTranslate="{{ 'gmsApp.EventStatus.' + program.status }}">{{ program.status }}</span>
-                </dd>
-                <dt><span jhiTranslate="gmsApp.program.employee">Employee</span></dt>
-                <dd>
-                    <div *ngIf="program.employee">
-                        <a [routerLink]="['/employee', program.employee?.id, 'view']">{{ program.employee?.id }}</a>
-                    </div>
                 </dd>
             </dl>
 

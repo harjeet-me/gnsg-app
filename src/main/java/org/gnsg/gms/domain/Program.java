@@ -1,6 +1,5 @@
 package org.gnsg.gms.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,8 +8,11 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
+import java.util.Objects;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.gnsg.gms.domain.enumeration.EVENTTYPE;
 
@@ -37,24 +39,21 @@ public class Program implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "event_type")
-    private EVENTTYPE eventType;
+    @Column(name = "program_type")
+    private EVENTTYPE programType;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "event_location")
-    private EVENTLOCATION eventLocation;
+    @Column(name = "location")
+    private EVENTLOCATION location;
 
-    @Column(name = "event_date_time")
-    private Instant eventDateTime;
+    @Column(name = "etime")
+    private Instant etime;
 
     @Column(name = "family")
     private String family;
 
     @Column(name = "phone_number")
     private String phoneNumber;
-
-    @Column(name = "email")
-    private String email;
 
     @Column(name = "address")
     private String address;
@@ -91,9 +90,9 @@ public class Program implements Serializable {
     @Column(name = "status")
     private EventStatus status;
 
-    @ManyToOne
-    @JsonIgnoreProperties("updatedBies")
-    private Employee employee;
+    @OneToMany(mappedBy = "program")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Sevadar> sevadars = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -104,43 +103,43 @@ public class Program implements Serializable {
         this.id = id;
     }
 
-    public EVENTTYPE getEventType() {
-        return eventType;
+    public EVENTTYPE getProgramType() {
+        return programType;
     }
 
-    public Program eventType(EVENTTYPE eventType) {
-        this.eventType = eventType;
+    public Program programType(EVENTTYPE programType) {
+        this.programType = programType;
         return this;
     }
 
-    public void setEventType(EVENTTYPE eventType) {
-        this.eventType = eventType;
+    public void setProgramType(EVENTTYPE programType) {
+        this.programType = programType;
     }
 
-    public EVENTLOCATION getEventLocation() {
-        return eventLocation;
+    public EVENTLOCATION getLocation() {
+        return location;
     }
 
-    public Program eventLocation(EVENTLOCATION eventLocation) {
-        this.eventLocation = eventLocation;
+    public Program location(EVENTLOCATION location) {
+        this.location = location;
         return this;
     }
 
-    public void setEventLocation(EVENTLOCATION eventLocation) {
-        this.eventLocation = eventLocation;
+    public void setLocation(EVENTLOCATION location) {
+        this.location = location;
     }
 
-    public Instant getEventDateTime() {
-        return eventDateTime;
+    public Instant getEtime() {
+        return etime;
     }
 
-    public Program eventDateTime(Instant eventDateTime) {
-        this.eventDateTime = eventDateTime;
+    public Program etime(Instant etime) {
+        this.etime = etime;
         return this;
     }
 
-    public void setEventDateTime(Instant eventDateTime) {
-        this.eventDateTime = eventDateTime;
+    public void setEtime(Instant etime) {
+        this.etime = etime;
     }
 
     public String getFamily() {
@@ -167,19 +166,6 @@ public class Program implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public Program email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getAddress() {
@@ -325,17 +311,29 @@ public class Program implements Serializable {
         this.status = status;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Set<Sevadar> getSevadars() {
+        return sevadars;
     }
 
-    public Program employee(Employee employee) {
-        this.employee = employee;
+    public Program sevadars(Set<Sevadar> sevadars) {
+        this.sevadars = sevadars;
         return this;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public Program addSevadar(Sevadar sevadar) {
+        this.sevadars.add(sevadar);
+        sevadar.setProgram(this);
+        return this;
+    }
+
+    public Program removeSevadar(Sevadar sevadar) {
+        this.sevadars.remove(sevadar);
+        sevadar.setProgram(null);
+        return this;
+    }
+
+    public void setSevadars(Set<Sevadar> sevadars) {
+        this.sevadars = sevadars;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -359,12 +357,11 @@ public class Program implements Serializable {
     public String toString() {
         return "Program{" +
             "id=" + getId() +
-            ", eventType='" + getEventType() + "'" +
-            ", eventLocation='" + getEventLocation() + "'" +
-            ", eventDateTime='" + getEventDateTime() + "'" +
+            ", programType='" + getProgramType() + "'" +
+            ", location='" + getLocation() + "'" +
+            ", etime='" + getEtime() + "'" +
             ", family='" + getFamily() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
-            ", email='" + getEmail() + "'" +
             ", address='" + getAddress() + "'" +
             ", withLangar='" + isWithLangar() + "'" +
             ", langarMenu='" + getLangarMenu() + "'" +

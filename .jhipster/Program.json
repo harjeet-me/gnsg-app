@@ -2,17 +2,17 @@
     "name": "Program",
     "fields": [
         {
-            "fieldName": "eventType",
+            "fieldName": "programType",
             "fieldType": "EVENTTYPE",
-            "fieldValues": "SUKHMANI_SAHIB,SUKHMANI_SAHIB_AT_HOME,FUNERAL_SEHAJ_PATH_BHOG,AKHAND_PATH_SAHIB,SEHAJ_PATH,LANGAR,KIRTAN_WITH_LANGAR"
+            "fieldValues": "SUKHMANI_SAHIB,SUKHMANI_SAHIB_AT_HOME,FUNERAL_SEHAJ_PATH_BHOG,AKHAND_PATH_SAHIB,SEHAJ_PATH_START,LANGAR,KIRTAN,SEHAJ_PATH_BHOG"
         },
         {
-            "fieldName": "eventLocation",
+            "fieldName": "location",
             "fieldType": "EVENTLOCATION",
-            "fieldValues": "HALL_2_GNSG,HALL_3_GNSG,GALLERY_GNSG,MAIN_HALL_GNSG,HOME,GNSG_SENIOR_CENTER"
+            "fieldValues": "HALL_2,HALL_3,GALLERY_UPSTAIRS,MAIN_HALL,HOME,GNSG_SENIOR_CENTER"
         },
         {
-            "fieldName": "eventDateTime",
+            "fieldName": "etime",
             "fieldType": "Instant"
         },
         {
@@ -21,10 +21,6 @@
         },
         {
             "fieldName": "phoneNumber",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "email",
             "fieldType": "String"
         },
         {
@@ -76,11 +72,10 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "employee",
-            "otherEntityRelationshipName": "updatedBy",
-            "relationshipName": "employee",
-            "otherEntityField": "id"
+            "relationshipType": "one-to-many",
+            "otherEntityName": "sevadar",
+            "otherEntityRelationshipName": "program",
+            "relationshipName": "sevadar"
         }
     ],
     "changelogDate": "20200206014028",
@@ -93,5 +88,6 @@
     "fluentMethods": true,
     "readOnly": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": "*",
+    "embedded": false
 }

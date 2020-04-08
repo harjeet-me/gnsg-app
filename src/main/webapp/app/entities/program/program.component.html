@@ -41,12 +41,11 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="eventType"><span jhiTranslate="gmsApp.program.eventType">Event Type</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="eventLocation"><span jhiTranslate="gmsApp.program.eventLocation">Event Location</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="eventDateTime"><span jhiTranslate="gmsApp.program.eventDateTime">Event Date Time</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="programType"><span jhiTranslate="gmsApp.program.programType">Program Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="location"><span jhiTranslate="gmsApp.program.location">Location</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="etime"><span jhiTranslate="gmsApp.program.etime">Etime</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="family"><span jhiTranslate="gmsApp.program.family">Family</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="phoneNumber"><span jhiTranslate="gmsApp.program.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="email"><span jhiTranslate="gmsApp.program.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="address"><span jhiTranslate="gmsApp.program.address">Address</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="withLangar"><span jhiTranslate="gmsApp.program.withLangar">With Langar</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="langarMenu"><span jhiTranslate="gmsApp.program.langarMenu">Langar Menu</span> <fa-icon icon="sort"></fa-icon></th>
@@ -58,19 +57,17 @@
                     <th scope="col"  jhiSortBy="remark"><span jhiTranslate="gmsApp.program.remark">Remark</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="bookingDate"><span jhiTranslate="gmsApp.program.bookingDate">Booking Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="status"><span jhiTranslate="gmsApp.program.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="employee.id"><span jhiTranslate="gmsApp.program.employee">Employee</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let program of programs ;trackBy: trackId">
                     <td><a [routerLink]="['/program', program.id, 'view']">{{ program.id }}</a></td>
-                    <td jhiTranslate="{{ 'gmsApp.EVENTTYPE.' + program.eventType }}">{{ program.eventType }}</td>
-                    <td jhiTranslate="{{ 'gmsApp.EVENTLOCATION.' + program.eventLocation }}">{{ program.eventLocation }}</td>
-                    <td>{{ program.eventDateTime | date:'medium' }}</td>
+                    <td jhiTranslate="{{ 'gmsApp.EVENTTYPE.' + program.programType }}">{{ program.programType }}</td>
+                    <td jhiTranslate="{{ 'gmsApp.EVENTLOCATION.' + program.location }}">{{ program.location }}</td>
+                    <td>{{ program.etime | date:'medium' }}</td>
                     <td>{{ program.family }}</td>
                     <td>{{ program.phoneNumber }}</td>
-                    <td>{{ program.email }}</td>
                     <td>{{ program.address }}</td>
                     <td>{{ program.withLangar }}</td>
                     <td jhiTranslate="{{ 'gmsApp.LANGARMENU.' + program.langarMenu }}">{{ program.langarMenu }}</td>
@@ -82,11 +79,6 @@
                     <td>{{ program.remark }}</td>
                     <td>{{ program.bookingDate | date:'medium' }}</td>
                     <td jhiTranslate="{{ 'gmsApp.EventStatus.' + program.status }}">{{ program.status }}</td>
-                    <td>
-                        <div *ngIf="program.employee">
-                            <a [routerLink]="['/employee', program.employee?.id, 'view']" >{{ program.employee?.id }}</a>
-                        </div>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

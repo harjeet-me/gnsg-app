@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { IEmployee } from 'app/shared/model/employee.model';
+import { ISevadar } from 'app/shared/model/sevadar.model';
 import { EVENTTYPE } from 'app/shared/model/enumerations/eventtype.model';
 import { EVENTLOCATION } from 'app/shared/model/enumerations/eventlocation.model';
 import { LANGARMENU } from 'app/shared/model/enumerations/langarmenu.model';
@@ -7,12 +7,11 @@ import { EventStatus } from 'app/shared/model/enumerations/event-status.model';
 
 export interface IProgram {
   id?: number;
-  eventType?: EVENTTYPE;
-  eventLocation?: EVENTLOCATION;
-  eventDateTime?: Moment;
+  programType?: EVENTTYPE;
+  location?: EVENTLOCATION;
+  etime?: Moment;
   family?: string;
   phoneNumber?: string;
-  email?: string;
   address?: string;
   withLangar?: boolean;
   langarMenu?: LANGARMENU;
@@ -24,18 +23,17 @@ export interface IProgram {
   remark?: string;
   bookingDate?: Moment;
   status?: EventStatus;
-  employee?: IEmployee;
+  sevadars?: ISevadar[];
 }
 
 export class Program implements IProgram {
   constructor(
     public id?: number,
-    public eventType?: EVENTTYPE,
-    public eventLocation?: EVENTLOCATION,
-    public eventDateTime?: Moment,
+    public programType?: EVENTTYPE,
+    public location?: EVENTLOCATION,
+    public etime?: Moment,
     public family?: string,
     public phoneNumber?: string,
-    public email?: string,
     public address?: string,
     public withLangar?: boolean,
     public langarMenu?: LANGARMENU,
@@ -47,7 +45,7 @@ export class Program implements IProgram {
     public remark?: string,
     public bookingDate?: Moment,
     public status?: EventStatus,
-    public employee?: IEmployee
+    public sevadars?: ISevadar[]
   ) {
     this.withLangar = this.withLangar || false;
   }

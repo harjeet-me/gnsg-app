@@ -12,34 +12,35 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gmsApp.program.eventType" for="field_eventType">Event Type</label>
-                    <select class="form-control" name="eventType" formControlName="eventType" id="field_eventType">
+                    <label class="form-control-label" jhiTranslate="gmsApp.program.programType" for="field_programType">Program Type</label>
+                    <select class="form-control" name="programType" formControlName="programType" id="field_programType">
                         <option value="SUKHMANI_SAHIB">{{ 'gmsApp.EVENTTYPE.SUKHMANI_SAHIB' | translate }}</option>
                         <option value="SUKHMANI_SAHIB_AT_HOME">{{ 'gmsApp.EVENTTYPE.SUKHMANI_SAHIB_AT_HOME' | translate }}</option>
                         <option value="FUNERAL_SEHAJ_PATH_BHOG">{{ 'gmsApp.EVENTTYPE.FUNERAL_SEHAJ_PATH_BHOG' | translate }}</option>
                         <option value="AKHAND_PATH_SAHIB">{{ 'gmsApp.EVENTTYPE.AKHAND_PATH_SAHIB' | translate }}</option>
-                        <option value="SEHAJ_PATH">{{ 'gmsApp.EVENTTYPE.SEHAJ_PATH' | translate }}</option>
+                        <option value="SEHAJ_PATH_START">{{ 'gmsApp.EVENTTYPE.SEHAJ_PATH_START' | translate }}</option>
                         <option value="LANGAR">{{ 'gmsApp.EVENTTYPE.LANGAR' | translate }}</option>
-                        <option value="KIRTAN_WITH_LANGAR">{{ 'gmsApp.EVENTTYPE.KIRTAN_WITH_LANGAR' | translate }}</option>
+                        <option value="KIRTAN">{{ 'gmsApp.EVENTTYPE.KIRTAN' | translate }}</option>
+                        <option value="SEHAJ_PATH_BHOG">{{ 'gmsApp.EVENTTYPE.SEHAJ_PATH_BHOG' | translate }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gmsApp.program.eventLocation" for="field_eventLocation">Event Location</label>
-                    <select class="form-control" name="eventLocation" formControlName="eventLocation" id="field_eventLocation">
-                        <option value="HALL_2_GNSG">{{ 'gmsApp.EVENTLOCATION.HALL_2_GNSG' | translate }}</option>
-                        <option value="HALL_3_GNSG">{{ 'gmsApp.EVENTLOCATION.HALL_3_GNSG' | translate }}</option>
-                        <option value="GALLERY_GNSG">{{ 'gmsApp.EVENTLOCATION.GALLERY_GNSG' | translate }}</option>
-                        <option value="MAIN_HALL_GNSG">{{ 'gmsApp.EVENTLOCATION.MAIN_HALL_GNSG' | translate }}</option>
+                    <label class="form-control-label" jhiTranslate="gmsApp.program.location" for="field_location">Location</label>
+                    <select class="form-control" name="location" formControlName="location" id="field_location">
+                        <option value="HALL_2">{{ 'gmsApp.EVENTLOCATION.HALL_2' | translate }}</option>
+                        <option value="HALL_3">{{ 'gmsApp.EVENTLOCATION.HALL_3' | translate }}</option>
+                        <option value="GALLERY_UPSTAIRS">{{ 'gmsApp.EVENTLOCATION.GALLERY_UPSTAIRS' | translate }}</option>
+                        <option value="MAIN_HALL">{{ 'gmsApp.EVENTLOCATION.MAIN_HALL' | translate }}</option>
                         <option value="HOME">{{ 'gmsApp.EVENTLOCATION.HOME' | translate }}</option>
                         <option value="GNSG_SENIOR_CENTER">{{ 'gmsApp.EVENTLOCATION.GNSG_SENIOR_CENTER' | translate }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gmsApp.program.eventDateTime" for="field_eventDateTime">Event Date Time</label>
+                    <label class="form-control-label" jhiTranslate="gmsApp.program.etime" for="field_etime">Etime</label>
                     <div class="d-flex">
-                        <input id="field_eventDateTime" type="datetime-local" class="form-control" name="eventDateTime" formControlName="eventDateTime" placeholder="YYYY-MM-DD HH:mm"/>
+                        <input id="field_etime" type="datetime-local" class="form-control" name="etime" formControlName="etime" placeholder="YYYY-MM-DD HH:mm"/>
                     </div>
                 </div>
 
@@ -53,12 +54,6 @@
                     <label class="form-control-label" jhiTranslate="gmsApp.program.phoneNumber" for="field_phoneNumber">Phone Number</label>
                     <input type="text" class="form-control" name="phoneNumber" id="field_phoneNumber"
                            formControlName="phoneNumber"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gmsApp.program.email" for="field_email">Email</label>
-                    <input type="text" class="form-control" name="email" id="field_email"
-                           formControlName="email"/>
                 </div>
 
                 <div class="form-group">
@@ -134,14 +129,6 @@
                         <option value="COMPLETED">{{ 'gmsApp.EventStatus.COMPLETED' | translate }}</option>
                         <option value="CANCELLED">{{ 'gmsApp.EventStatus.CANCELLED' | translate }}</option>
                         <option value="REQUESTED">{{ 'gmsApp.EventStatus.REQUESTED' | translate }}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="gmsApp.program.employee" for="field_employee">Employee</label>
-                    <select class="form-control" id="field_employee" name="employee" formControlName="employee">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="employeeOption.id === editForm.get('employee')!.value?.id ? editForm.get('employee')!.value : employeeOption" *ngFor="let employeeOption of employees; trackBy: trackById">{{ employeeOption.id }}</option>
                     </select>
                 </div>
             </div>

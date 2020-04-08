@@ -2,12 +2,11 @@
 // an ignored comment
 /** not an ignored comment */
 entity Program {
-	eventType EVENTTYPE ,
-    eventLocation EVENTLOCATION
-    eventDateTime Instant,
+	programType EVENTTYPE ,
+    location EVENTLOCATION
+    etime Instant,
     family String,
     phoneNumber String,
-    email String ,
     address String ,
     withLangar Boolean,
     langarMenu LANGARMENU ,
@@ -22,11 +21,6 @@ entity Program {
 
     
 }
-
-entity File{   
-   attachment Blob
-}
-
 enum EventStatus{
    BOOKED , COMPLETED , CANCELLED , REQUESTED
 }
@@ -37,7 +31,7 @@ SIMPLE_KHEER_SHAHIPANEER ,
 SIMPLE_KHEER_MATARPANEER
 }
 enum EVENTLOCATION{
-HALL_2_GNSG , HALL_3_GNSG , GALLERY_GNSG , MAIN_HALL_GNSG , HOME , GNSG_SENIOR_CENTER
+HALL_2 , HALL_3 , GALLERY_UPSTAIRS , MAIN_HALL, HOME , GNSG_SENIOR_CENTER
 }
 
 /**
@@ -53,12 +47,11 @@ entity Task {
 /**
  * The Employee entity.
  */
-entity Employee {
+entity Sevadar {
 	/**
 	* The firstname attribute.
 	*/
-	firstName String,
-	lastName String,
+	name String,
 	email String,
 	phoneNumber String,
 	sevaStartDate Instant,
@@ -69,23 +62,24 @@ entity Employee {
 
 enum EVENTTYPE {
     SUKHMANI_SAHIB, 
-    SUKHMANI_SAHIB_AT_HOME, FUNERAL_SEHAJ_PATH_BHOG, 
+    SUKHMANI_SAHIB_AT_HOME,
+    FUNERAL_SEHAJ_PATH_BHOG, 
     AKHAND_PATH_SAHIB ,
-    SEHAJ_PATH , LANGAR , KIRTAN_WITH_LANGAR 
+    SEHAJ_PATH_START , 
+    LANGAR ,
+    KIRTAN,
+    SEHAJ_PATH_BHOG
 }
 
 // defining multiple OneToMany relationships with comments
-relationship OneToMany {
-	
-    Employee {updatedBy} to Program ,
-    Employee {file} to File ,    
-	
-    }
+ relationship OneToMany {
+   Program {sevadar(name)} to Sevadar 
+   }
 
 
 // Set pagination options
 
-paginate Task , Program , Employee with pagination
+paginate Task , Program , Sevadar with pagination
 
 // Use Data Transfert Objects (DTO)
 // dto * with mapstruct

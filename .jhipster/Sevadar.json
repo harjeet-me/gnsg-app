@@ -1,0 +1,51 @@
+{
+    "name": "Sevadar",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "The firstname attribute.",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "sevaStartDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "sevaEndDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "isValid",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "program",
+            "otherEntityRelationshipName": "sevadar",
+            "relationshipName": "program",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200408214200",
+    "javadoc": "The Employee entity.",
+    "entityTableName": "sevadar",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
